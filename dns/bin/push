@@ -1,2 +1,4 @@
 #!/bin/sh -eux
+cd "`dirname "$0"`/.."
+
 dnscontrol push -v SWARMSIM_COM_SECRET1=$SWARMSIM_COM_SECRET1 -v SWARMSIM_COM_SECRET2=$SWARMSIM_COM_SECRET2 "$@"

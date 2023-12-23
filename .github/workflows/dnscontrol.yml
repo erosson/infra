@@ -12,12 +12,9 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      # the example file uses env variables, which is just what CI needs
-      - run: cp creds.example.json creds.json
-
       - run: ./.devcontainer/setup.sh
-      # - run: ./bin/preview
-      - run: ./bin/push
+      # - run: ./dns/bin/preview
+      - run: ./dns/bin/push
         env: 
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
