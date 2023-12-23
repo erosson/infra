@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - run: pwd
+      - run: ls -la
       - run: ./.devcontainer/setup.sh
       - run: ./bin/preview
       # - run: ./bin/push
