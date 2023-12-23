@@ -1,2 +1,2 @@
 #!/bin/sh -eux
-dnscontrol preview --full
+dnscontrol preview --full "$@"
