@@ -11,6 +11,10 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
+
+      # the example file uses env variables, which is just what CI needs
+      - run: cp creds.example.json creds.json
+
       - run: ./.devcontainer/setup.sh
       - run: ./bin/preview
       # - run: ./bin/push
