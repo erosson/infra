@@ -22,9 +22,10 @@ jobs:
           SWARMSIM_COM_SECRET1: ${{ secrets.SWARMSIM_COM_SECRET1 }}
           SWARMSIM_COM_SECRET2: ${{ secrets.SWARMSIM_COM_SECRET2 }}
 
-      - run: tofu plan --detailed-exitcode
-        working-directory: tf/
-        env: 
-          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      # TODO: CI needs tf state storage backend
+      #- run: tofu plan --detailed-exitcode
+      #  working-directory: tf/
+      #  env: 
+      #    CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+      #    CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+      #    GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
