@@ -23,7 +23,9 @@ jobs:
           SWARMSIM_COM_SECRET2: ${{ secrets.SWARMSIM_COM_SECRET2 }}
 
       # TODO: CI needs tf state storage backend
-      #- run: tofu plan --detailed-exitcode
+      #- run: |
+      #    tofu init
+      #    tofu plan --detailed-exitcode
       #  working-directory: tf/
       #  env: 
       #    CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
