@@ -13,7 +13,3 @@ terraform {
 
 provider "github" {}
 provider "cloudflare" {}
-
-module "test-tf_erosson_org" {
-  source = "./test-tf.erosson.org"
-}
