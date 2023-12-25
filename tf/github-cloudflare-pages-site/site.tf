@@ -1,5 +1,5 @@
 locals {
-  domain = "${var.subdomain}.${var.parent_domain}"
+  domain = "${var.subdomain}.${var.domain_name}"
   domain_slug = replace(local.domain, ".", "-")
   github_repo_name = var.github_repo_name != null ? var.github_repo_name : local.domain
   cloudflare_pages_name = var.cloudflare_pages_name != null ? var.cloudflare_pages_name : local.domain_slug
@@ -54,7 +54,7 @@ resource "cloudflare_pages_domain" "main" {
 }
 
 resource "cloudflare_record" "main" {
-  zone_id = var.cloudflare_zone_id
+  zone_id = var.domain_cloudflare_zone_id
   type = "CNAME"
   name = var.subdomain
   value = "${cloudflare_pages_project.main.name}.pages.dev."
