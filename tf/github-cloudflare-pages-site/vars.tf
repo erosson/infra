@@ -7,12 +7,11 @@ variable "domain_cloudflare_zone_id" {
 variable "domain_name" {
   description = "Domain name. If subdomain is `www` and domain_name is `example.com`, the site will deploy at `www.example.com`. `domain_cloudflare_zone_id` must match this."
 }
-variable "github_owner" {
-  description = "Name of the github repository owner/organization."
-}
-variable "github_repo_name" {
-  default = null
-  description = "Github repository name. By default, the site's full domain name."
+variable "github_repository" {
+  type = object({
+    name = string
+    full_name = string
+  })
 }
 variable "license_template" {
   default = "GPL-3.0"

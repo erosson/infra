@@ -7,9 +7,6 @@ output "cloudflare_pages_domain" {
 output "cloudflare_record" {
     value = cloudflare_record.main
 }
-output "github_repository" {
-    value = github_repository.main
-}
 output "github_readme" {
     value = github_repository_file.readme-terraform
 }

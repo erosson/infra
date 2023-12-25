@@ -1,19 +1,22 @@
 locals {
   domain = "${var.subdomain}.${var.domain_name}"
   domain_slug = replace(local.domain, ".", "-")
-  github_repo_name = var.github_repo_name != null ? var.github_repo_name : local.domain
+  # github_repo_name = var.github_repo_name != null ? var.github_repo_name : local.domain
+  github_repo_name = var.github_repository.name
+  github_owner = replace(var.github_repository.full_name, "/\\/.*$/", "")
   cloudflare_pages_name = var.cloudflare_pages_name != null ? var.cloudflare_pages_name : local.domain_slug
 }
-resource "github_repository" "main" {
-  name = local.github_repo_name
-  homepage_url = local.domain
-  license_template = var.license_template
-}
+// resource "github_repository" "main" {
+//   name = local.github_repo_name
+//   homepage_url = local.domain
+//   license_template = var.license_template
+// }
 
 resource "github_repository_file" "readme-terraform" {
-  repository = github_repository.main.name
-  depends_on = [ github_repository.main ]
-  file = "README-terraform.md"
+  # repository = github_repository.main.name
+  repository = local.github_repo_name
+  depends_on = [ var.github_repository ]
+  file = "README-tf-cloudflare.md"
   content = <<EOF
 Static site and Github repo managed by Evan's Opentofu (Terraform) infrastructure.
 
@@ -38,12 +41,12 @@ resource "cloudflare_pages_project" "main" {
   source {
     type = "github"
     config {
-      owner = var.github_owner
+      owner = local.github_owner
       repo_name = local.github_repo_name
       production_branch = "main"
     }
   }
-  depends_on = [ github_repository.main ]
+  depends_on = [ var.github_repository ]
 }
 
 resource "cloudflare_pages_domain" "main" {
