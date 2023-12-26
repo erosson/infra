@@ -29,14 +29,8 @@ jobs:
       - uses: actions/checkout@v4
       - run: ./.devcontainer/setup.sh
       - run: |
-          cd 1_stateful/
-          tofu init
-          tofu plan --detailed-exitcode
-          cd -
-          cd 2_stateless/
-          tofu init
-          tofu plan --detailed-exitcode
-          cd -
+          ./bin/init
+          ./bin/ci
         working-directory: tf/
         env: 
           AWS_ACCESS_KEY_ID: ${{ secrets.CLOUDFLARE_R2_BACKEND_ACCESS_KEY }}

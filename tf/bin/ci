@@ -1,0 +1,4 @@
+#!/bin/sh
+cd "`dirname "$0"`/.."
+./bin/tofu -chdir=1_stateful/ plan --detailed-exitcode
+./bin/tofu -chdir=2_stateless/ plan --detailed-exitcode
