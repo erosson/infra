@@ -7,7 +7,6 @@ rm -f /tmp/dnscontrol.deb
 
 cd dns
 dnscontrol write-types
-cp -n creds.example.json creds.json
 cd -
 
 # https://opentofu.org/docs/intro/install/deb
