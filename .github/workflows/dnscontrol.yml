@@ -11,9 +11,8 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
-
       - run: ./.devcontainer/setup.sh
-      # - run: ./dns/bin/push
+
       - run: ./bin/preview --expect-no-changes
         working-directory: dns/
         env: 
@@ -22,12 +21,13 @@ jobs:
           SWARMSIM_COM_SECRET1: ${{ secrets.SWARMSIM_COM_SECRET1 }}
           SWARMSIM_COM_SECRET2: ${{ secrets.SWARMSIM_COM_SECRET2 }}
 
-      # TODO: CI needs tf state storage backend
-      #- run: |
-      #    tofu init
-      #    tofu plan --detailed-exitcode
-      #  working-directory: tf/
-      #  env: 
-      #    CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-      #    CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-      #    GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - run: tofu init
+        working-directory: tf/
+        env: 
+          AWS_ACCESS_KEY_ID: ${{ secrets.CLOUDFLARE_R2_BACKEND_ACCESS_KEY }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.CLOUDFLARE_R2_BACKEND_ACCESS_KEY }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - run: tofu plan --detailed-exitcode
+        working-directory: tf/
