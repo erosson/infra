@@ -1,4 +1,5 @@
-name: dnscontrol push
+# If this fails, dnscontrol or opentofu have diffs. You're expected to apply changes manually!
+name: dnscontrol/opentofu diff check
 
 on:
   push:
@@ -21,6 +22,12 @@ jobs:
           SWARMSIM_COM_SECRET1: ${{ secrets.SWARMSIM_COM_SECRET1 }}
           SWARMSIM_COM_SECRET2: ${{ secrets.SWARMSIM_COM_SECRET2 }}
 
+  opentofu:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+      - run: ./.devcontainer/setup.sh
       - run: |
           tofu init
           tofu plan --detailed-exitcode
