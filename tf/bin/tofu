@@ -7,4 +7,4 @@ if [ -f ../.env ]; then
     set +a
 fi
 
-tofu init
+tofu "$@"

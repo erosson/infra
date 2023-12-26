@@ -31,3 +31,6 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - run: tofu plan --detailed-exitcode
         working-directory: tf/
+        env: 
+          AWS_ACCESS_KEY_ID: ${{ secrets.CLOUDFLARE_R2_BACKEND_ACCESS_KEY }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.CLOUDFLARE_R2_BACKEND_SECRET_KEY }}
