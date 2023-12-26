@@ -1,9 +1,9 @@
 #!/bin/sh
-cd "`dirname "$0"`/.."
+DIR="`dirname "$0"`/.."
 
-if [ -f ../.env ]; then
+if [ -f "$DIR/../.env" ]; then
     set -a
-    . ../.env
+    . "$DIR/../.env"
     set +a
 fi
 

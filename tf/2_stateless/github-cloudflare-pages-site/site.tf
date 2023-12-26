@@ -20,7 +20,7 @@ resource "github_repository_file" "readme-terraform" {
   content = <<EOF
 Static site and Github repo managed by Evan's Opentofu (Terraform) infrastructure.
 
-* This repository's `.tf` configuration: https://github.com/erosson/infra/tree/main/tf/${local.domain}.tf
+* This repository's `.tf` configuration: https://github.com/erosson/infra/tree/main/tf/
 * Public site: https://${local.domain}
 * Backend site: https://${local.cloudflare_pages_name}.pages.dev
 * Deployment status: https://dash.cloudflare.com/${var.cloudflare_account_id}/pages/view/${local.cloudflare_pages_name}

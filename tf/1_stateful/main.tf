@@ -16,7 +16,7 @@ terraform {
   backend "s3" {
     // bucket content: https://dash.cloudflare.com/fed1bc67ffb2f62c6deaa5c7f8f9eb93/r2/default/buckets/erosson-infra
     bucket = "erosson-infra"
-    key    = "erosson/infra/terraform.tfstate"
+    key    = "erosson/infra/1_stateful/terraform.tfstate"
     endpoints = { s3 = "https://fed1bc67ffb2f62c6deaa5c7f8f9eb93.r2.cloudflarestorage.com" }
     region = "us-east-1"
 
