@@ -8,6 +8,10 @@ terraform {
       source = "cloudflare/cloudflare"
       version = "4.20.0"
     }
+    netlify = {
+      source = "AegirHealth/netlify"
+      version = "0.6.12"
+    }
   }
 
   // Not actually amazon S3. cloudflare R2 - aws-S3-compatible.
@@ -32,3 +36,4 @@ terraform {
 
 provider "github" {}
 provider "cloudflare" {}
+provider "netlify" {}

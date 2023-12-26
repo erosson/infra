@@ -6,11 +6,6 @@ locals {
   github_owner = replace(var.github_repository.full_name, "/\\/.*$/", "")
   cloudflare_pages_name = var.cloudflare_pages_name != null ? var.cloudflare_pages_name : local.domain_slug
 }
-// resource "github_repository" "main" {
-//   name = local.github_repo_name
-//   homepage_url = local.domain
-//   license_template = var.license_template
-// }
 
 resource "github_repository_file" "readme-terraform" {
   # repository = github_repository.main.name

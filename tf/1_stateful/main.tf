@@ -4,10 +4,6 @@ terraform {
       source  = "integrations/github"
       version = "~> 5.0"
     }
-    cloudflare = {
-      source = "cloudflare/cloudflare"
-      version = "4.20.0"
-    }
   }
 
   // Not actually amazon S3. cloudflare R2 - aws-S3-compatible.
@@ -31,4 +27,3 @@ terraform {
 }
 
 provider "github" {}
-provider "cloudflare" {}
