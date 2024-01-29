@@ -31,6 +31,8 @@ D("erosson.org", REG, DnsProvider(DNS),
     CNAME("travel", "travel.erosson.org.s3-website-us-east-1.amazonaws.com.", CF_PROXY_ON),
     CNAME("wheres", "domains.tumblr.com."),
 
+    A("finsat-qgis", "167.172.26.158", CF_PROXY_ON),
+
     ///////////////////////////////////////////////////////
     // stuff that isn't maintained, but still has some users:
     ///////////////////////////////////////////////////////
