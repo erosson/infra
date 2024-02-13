@@ -5,6 +5,12 @@ name: drift-check
 on:
   push:
     branches: ["main"]
+  schedule:
+    # "At 07:52 on Sunday."
+    # https://crontab.guru/#52_7_*_*_0
+    # run on a schedule because config can drift without code changes.
+    # in fact, it usually drifts because I forgot there was code to change
+    - cron: '52 7 * * 0'
   workflow_dispatch:
 
 jobs:
