@@ -10,7 +10,7 @@ module "test-tf_erosson_org" {
   source = "../modules/github-cloudflare-pages-site"
   subdomain = local.subdomain
   domain_name = local.domain_name
-  domain_cloudflare_zone_id = "7c06b35c2392935ebb0653eaf94a3e70"
+  domain_cloudflare_zone_id = "7c06b35c2392935ebb0653eaf94a3e70" // erosson.org
   cloudflare_account_id = "fed1bc67ffb2f62c6deaa5c7f8f9eb93"
   build_config = {
     build_command = "true"

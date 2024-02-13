@@ -10,12 +10,13 @@ locals {
 resource "github_repository_file" "readme-terraform" {
   # repository = github_repository.main.name
   repository = local.github_repo_name
-  depends_on = [ var.github_repository ]
+  # depending on cloudflare_pages_project conveniently triggers our first deployment
+  depends_on = [ var.github_repository, cloudflare_pages_project.main ]
   file = "README-tf-cloudflare.md"
   content = <<EOF
 Static site and Github repo managed by Evan's Opentofu (Terraform) infrastructure.
 
-* This repository's `.tf` configuration: https://github.com/erosson/infra/tree/main/tf/
+* This repository's `.tf` configuration: https://github.com/erosson/infra/tree/main/tf/${local.domain}
 * Public site: https://${local.domain}
 * Backend site: https://${local.cloudflare_pages_name}.pages.dev
 * Deployment status: https://dash.cloudflare.com/${var.cloudflare_account_id}/pages/view/${local.cloudflare_pages_name}
