@@ -24,5 +24,8 @@ D("swarmsim.com", REG, DnsProvider(DNS),
 	TXT("google._domainkey", "v=DKIM1; k=rsa; p=MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAgsAWn+X5jNHTPO6UayRLqFsSmzF5WmSh1Ov0bIUAu9JubTLcoUtX2a4yvdHj7PEGwGJ+ZpM7ja2f/emHY3yrBGDr3CrlM4DLOuwKmW0LrL8499FChnsgx7s3JhI5ln3+zgen+e0y7l6bM/bu40oiIkoxCSTyesoZ1aSO3bi4sOv7cxOcpvMgDHDHPQwt5dMlxYq4dmu/fco6RCl7EFhtUmCkpXLgDBigBCmTclKcXYOpLxxzd8npc83aLg+VPVWS0CfnahWgby1RcpFQ8H5ihtE/FGX+TNoxClVgy23v+lvkmIj9wszRi/msPL6hdVRSFp2O4kfETYPIw805mb+uGQIDAQAB"),
 	TXT("@", "keybase-site-verification=6395O2FZ_laPKmseNXoS6K8_EH6ksLiSbZgHRTmB-HI"),
 	TXT("@", "v=spf1 include:_spf.google.com ~all"),
-	TXT("@", "google-site-verification=huueYzqrM57YM5ogbWfTfrgxMPOtLuwIBf6l82rGrjE")
+	TXT("@", "google-site-verification=huueYzqrM57YM5ogbWfTfrgxMPOtLuwIBf6l82rGrjE"),
+
+	// terraform handles others
+	IGNORE("math2")
 )
