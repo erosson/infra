@@ -1,5 +1,6 @@
-# If this fails, dnscontrol or opentofu have diffs. You're expected to apply changes manually!
-name: dnscontrol/opentofu diff check
+# If this fails, dnscontrol or opentofu have diffs. Real state has diverged from the infrastructure code; drift.
+# CI doesn't apply changes; you're expected to apply changes manually!
+name: drift-check
 
 on:
   push:
