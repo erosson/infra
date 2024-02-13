@@ -2,7 +2,7 @@
 
 [![drift-check](https://github.com/erosson/infra/actions/workflows/drift-check.yml/badge.svg)](https://github.com/erosson/infra/actions/workflows/drift-check.yml)
 
-Evan's DNS and infrastructure configuration.
+Evan's public DNS and infrastructure configuration. (There's another repo for private config.)
 
 ## DNS
 DNS automatically applied on `git push` using [dnscontrol](https://dnscontrol.org/) and github actions.

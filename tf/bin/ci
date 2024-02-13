@@ -2,7 +2,6 @@
 # Show the plan for all our infra. Passes if all state is up to date. Suitable for CI.
 set -eu
 cd "`dirname "$0"`/.."
-export 
 
 STACKS=(
 ./git-repos
