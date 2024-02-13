@@ -8,6 +8,7 @@ on:
   schedule:
     # "At 07:52 on Sunday."
     # https://crontab.guru/#52_7_*_*_0
+    # https://time.is/0752AM_in_UTC
     # run on a schedule because config can drift without code changes.
     # in fact, it usually drifts because I forgot there was code to change
     - cron: '52 7 * * 0'
