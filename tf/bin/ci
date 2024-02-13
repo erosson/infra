@@ -8,11 +8,13 @@ STACKS=(
 ./git-repos
 ./test-tf.erosson.org
 ./math2.swarmsim.com
+./cooking.erosson.org
 )
 WORKSPACES=(
 ./git-repos
 ./test-tf.erosson.org
 ./math2.swarmsim.com
+./cooking.erosson.org
 # no workspaces just yet. with personal projects, it's all in production all the time, amirite?
 # but if there were workspaces, it might look a bit like: 
 # ./test-tf.erosson.org/staging
