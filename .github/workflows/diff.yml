@@ -28,10 +28,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - run: ./.devcontainer/setup.sh
-      - run: |
-          ./bin/init
-          ./bin/ci
-        working-directory: tf/
+      - run: ./tf/bin/ci
         env: 
           AWS_ACCESS_KEY_ID: ${{ secrets.CLOUDFLARE_R2_BACKEND_ACCESS_KEY }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.CLOUDFLARE_R2_BACKEND_SECRET_KEY }}

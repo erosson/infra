@@ -1,4 +1,28 @@
-#!/bin/sh
+#!/bin/bash
+# Show the plan for all our infra. Passes if all state is up to date. Suitable for CI.
+set -eu
 cd "`dirname "$0"`/.."
-./bin/tofu -chdir=1_stateful/ plan --detailed-exitcode
-./bin/tofu -chdir=2_stateless/ plan --detailed-exitcode
+export 
+
+STACKS=(
+./git-repos
+./test-tf.erosson.org
+)
+WORKSPACES=(
+./git-repos
+./test-tf.erosson.org
+# no workspaces just yet. with personal projects, it's all in production all the time, amirite?
+# but if there were workspaces, it might look a bit like: 
+# ./test-tf.erosson.org/staging
+# ./test-tf.erosson.org/prod
+)
+
+set -x
+for STACK in ${STACKS[@]}; do
+    $STACK/tofu init
+done
+for WORKSPACE in ${WORKSPACES[@]}; do
+    TF_VAR_CI=true $WORKSPACE/tofu plan -detailed-exitcode
+done
+
+echo success

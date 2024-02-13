@@ -1,0 +1,18 @@
+#!/bin/bash
+set -eu
+
+cd "`dirname "$0"`"
+# relative to where we're being called from, "<repo>/tf/<stack>/<workspace>" -> "<repo>"
+INFRA_DIR=../../..
+# load infra env vars
+if [ -f "$INFRA_DIR/.env" ]; then
+    # export all vars in .env
+    set -a
+    . "$INFRA_DIR/.env"
+    set +a
+fi
+
+WORKSPACE="`./workspace`"
+cd ..
+CMD="$1";shift
+tofu "$CMD" -var-file=$WORKSPACE/$WORKSPACE.tfvars "$@" 

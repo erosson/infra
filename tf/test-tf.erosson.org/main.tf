@@ -7,7 +7,7 @@ data "github_repository" "main" {
   name = local.domain
 }
 module "test-tf_erosson_org" {
-  source = "./github-cloudflare-pages-site"
+  source = "../modules/github-cloudflare-pages-site"
   subdomain = local.subdomain
   domain_name = local.domain_name
   domain_cloudflare_zone_id = "7c06b35c2392935ebb0653eaf94a3e70"

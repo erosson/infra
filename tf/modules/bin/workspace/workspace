@@ -1,0 +1,10 @@
+#!/bin/bash
+set -eu
+# don't propagate directory changes to caller
+(
+    cd "`dirname "$0"`"
+    WORKSPACE="$(basename $(pwd))"
+    cd ..
+    ./tofu workspace select -or-create=true $WORKSPACE >&2
+    echo "$WORKSPACE"
+)

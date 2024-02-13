@@ -1,0 +1,15 @@
+#!/bin/bash
+set -eu
+
+cd "`dirname "$0"`"
+# relative to where we're being called from, "<repo>/tf/<stack>" -> "<repo>"
+INFRA_DIR=../..
+# load infra env vars
+if [ -f "$INFRA_DIR/.env" ]; then
+    # export all vars in .env
+    set -a
+    . "$INFRA_DIR/.env"
+    set +a
+fi
+
+tofu "$@"

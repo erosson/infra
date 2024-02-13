@@ -1,4 +1,0 @@
-#!/bin/sh
-cd "`dirname "$0"`/.."
-./bin/tofu -chdir=1_stateful/ init
-./bin/tofu -chdir=2_stateless/ init
