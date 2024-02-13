@@ -30,3 +30,12 @@ resource "github_repository" "wolcendb" {
     prevent_destroy = true
   }
 }
+resource "github_repository" "cooking_erosson_org" {
+  # https://github.com/erosson/wolcendb
+  name = "recipes"
+  homepage_url = "https://cooking.erosson.org"
+  license_template = "GPL-3.0"
+  lifecycle {
+    prevent_destroy = true
+  }
+}

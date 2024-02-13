@@ -18,10 +18,6 @@ D("erosson.org", REG, DnsProvider(DNS),
     // https://github.com/mapwatch/mapwatch - path of exile map tracking
     CNAME("mapwatch", "mapwatch.erosson.org.s3-website-us-east-1.amazonaws.com.", CF_PROXY_ON),
 
-    // https://cooking.erosson.org
-    // https://github.com/erosson/recipes - my little baking website
-    CNAME("cooking", "cooking-erosson-org.netlify.app."),
-
     // https://freecbt.erosson.org
     // https://github.com/erosson/freecbt - free cognitive behavioral therapy app
     CNAME("freecbt", "freecbt.netlify.app."),
@@ -49,6 +45,7 @@ D("erosson.org", REG, DnsProvider(DNS),
     // stuff managed by terraform:
     ///////////////////////////////////////////////////////
     IGNORE("test-tf"),
+    IGNORE("cooking"),
 
     ///////////////////////////////////////////////////////
     // stuff that isn't widely used, and not maintained:
