@@ -1,5 +1,7 @@
 # Infra
 
+[![drift-check](https://github.com/erosson/infra/actions/workflows/drift-check.yml/badge.svg)](https://github.com/erosson/infra/actions/workflows/drift-check.yml)
+
 Evan's DNS and infrastructure configuration.
 
 ## DNS
