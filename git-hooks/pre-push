@@ -1,0 +1,3 @@
+#!/bin/bash
+./dns/bin/preview --expect-no-changes
+./tf/bin/ci
