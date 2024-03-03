@@ -30,3 +30,24 @@ sudo tee /etc/apt/sources.list.d/opentofu.list > /dev/null
 sudo apt-get update
 sudo apt-get install -y tofu
 )
+
+# infisical.com secrets management
+# https://infisical.com/docs/cli/overview
+# https://infisical.com/docs/cli/commands/vault
+curl -1sLf \
+'https://dl.cloudsmith.io/public/infisical/infisical-cli/setup.deb.sh' \
+| sudo -E bash
+sudo apt-get update && sudo apt-get install -y infisical
+
+if [ "${CI:-}" == "" ]; then
+    # make `infisical login` work in the devcontainer.
+    echo 'non-CI infisical setup'
+    # transient local passphrase. this prevents nagging for a passphrase whenever we call infisical
+    export INFISICAL_VAULT_FILE_PASSPHRASE=$(tr -dc 'A-Za-z0-9!?%=' < /dev/urandom | head -c 32)
+    echo "export INFISICAL_VAULT_FILE_PASSPHRASE=\"$INFISICAL_VAULT_FILE_PASSPHRASE\"" >> ~/.bashrc
+    infisical vault set file
+else
+    # CI expects 
+    echo 'CI infisical setup'
+    [ "${INFISICAL_TOKEN:-}" != "" ] || (echo 'INFISICAL_TOKEN is required' && exit 1)
+fi
