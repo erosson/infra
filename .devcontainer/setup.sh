@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 set -eux
 cd "`dirname "$0"`/.."
 
@@ -45,7 +45,7 @@ if [ "${CI:-}" == "" ]; then
     # transient local passphrase. this prevents nagging for a passphrase whenever we call infisical
     export INFISICAL_VAULT_FILE_PASSPHRASE=$(tr -dc 'A-Za-z0-9!?%=' < /dev/urandom | head -c 32)
     echo "export INFISICAL_VAULT_FILE_PASSPHRASE=\"$INFISICAL_VAULT_FILE_PASSPHRASE\"" >> ~/.bashrc
-    infisical vault set file
+    infisical vault set file || true
 else
     # CI expects INFISICAL_TOKEN. no need during setup, though
     echo 'CI infisical setup'
