@@ -47,7 +47,7 @@ if [ "${CI:-}" == "" ]; then
     echo "export INFISICAL_VAULT_FILE_PASSPHRASE=\"$INFISICAL_VAULT_FILE_PASSPHRASE\"" >> ~/.bashrc
     infisical vault set file
 else
-    # CI expects 
+    # CI expects INFISICAL_TOKEN. no need during setup, though
     echo 'CI infisical setup'
-    [ "${INFISICAL_TOKEN:-}" != "" ] || (echo 'INFISICAL_TOKEN is required' && exit 1)
+    # [ "${INFISICAL_TOKEN:-}" != "" ] || (echo 'INFISICAL_TOKEN is required' && exit 1)
 fi
