@@ -50,6 +50,9 @@ resource "cloudflare_pages_domain" "main" {
   project_name = local.cloudflare_pages_name
   domain       = local.domain
   depends_on = [cloudflare_pages_project.main]
+  lifecycle {
+    replace_triggered_by = [ cloudflare_pages_project.main ]
+  }
 }
 
 resource "cloudflare_record" "main" {

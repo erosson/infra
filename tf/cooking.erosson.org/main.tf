@@ -4,7 +4,7 @@ locals {
   domain = "${local.subdomain}.${local.domain_name}"
 }
 data "github_repository" "main" {
-  name = "recipes"
+  name = local.domain
 }
 module "main" {
   source = "../modules/github-cloudflare-pages-site"
