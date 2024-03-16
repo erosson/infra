@@ -1,7 +1,5 @@
-https://math2.swarmsim.com/
+https://cooking.erosson.org
 
-https://github.com/erosson/math2.swarmsim.com
+https://github.com/erosson/cooking.erosson.org
 
-A simple static site created entirely by Terraform.
-
-Safe to destroy/recreate.
+Stateless static website. Safe to destroy/recreate.
