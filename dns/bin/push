@@ -7,4 +7,4 @@ if [ -f ../.env ]; then
     set +a
 fi
 
-dnscontrol push -v SWARMSIM_COM_SECRET1=$SWARMSIM_COM_SECRET1 -v SWARMSIM_COM_SECRET2=$SWARMSIM_COM_SECRET2 "$@"
+infisical run -- bash -c "dnscontrol push -v SWARMSIM_COM_SECRET1=\$SWARMSIM_COM_SECRET1 -v SWARMSIM_COM_SECRET2=\$SWARMSIM_COM_SECRET2 $@"

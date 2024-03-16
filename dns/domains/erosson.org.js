@@ -44,29 +44,26 @@ D("erosson.org", REG, DnsProvider(DNS),
     // stuff that isn't widely used, and not maintained:
     ///////////////////////////////////////////////////////
 
-    // https://github.com/erosson/elm-games
-    CNAME("elmlab", "elm-games.pages.dev.", CF_PROXY_ON),
-
     // https://github.com/erosson/diff
-    CNAME("diff", "erosson-diff.netlify.app."),
+    // CNAME("diff", "erosson-diff.netlify.app."),
 
     // https://github.com/erosson/event-link
-    CNAME("event", "erosson-event.netlify.app."),
+    // CNAME("event", "erosson-event.netlify.app."),
 
     // https://github.com/erosson/freedbt
-    CNAME("freedbt", "freedbt.pages.dev.", CF_PROXY_ON),
+    // CNAME("freedbt", "freedbt.pages.dev.", CF_PROXY_ON),
 
     // https://github.com/erosson/genealogy (private repo, but it's fine that the dns record's public)
     CNAME("genealogy", "cname.vercel-dns.com."),
 
     // https://github.com/erosson/keyboard-collector
-    CNAME("keyboard-collector", "keyboard-collector.netlify.app."),
+    // CNAME("keyboard-collector", "keyboard-collector.netlify.app."),
 
     // https://gitlab.com/erosson/piano-v2
-    CNAME("piano-v2", "piano-v2.netlify.com."),
+    // CNAME("piano-v2", "piano-v2.netlify.com."),
 
     // https://gitlab.com/erosson/random-items
-    CNAME("random-items", "random-items-erosson-org.netlify.com."),
+    // CNAME("random-items", "random-items-erosson-org.netlify.com."),
 
     // https://gitlab.com/erosson/travel-erosson-org - my travel photos
     // originally hosted on tumblr at https://wheres.erosson.org, moved to git+s3 for long-term archival at https://travel.erosson.org
