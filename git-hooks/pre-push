@@ -1,3 +1,4 @@
 #!/bin/bash
+set -eu
 ./dns/bin/preview --expect-no-changes
 ./tf/bin/ci
