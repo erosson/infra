@@ -1,5 +1,5 @@
-https://freecbt.erosson.org
+https://vegas-wordle.erosson.org
 
-https://github.com/erosson/freecbt.erosson.org
+https://github.com/erosson/vegas-wordle
 
 Stateless static website. Safe to destroy/recreate.
