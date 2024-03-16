@@ -18,10 +18,6 @@ D("erosson.org", REG, DnsProvider(DNS),
     // https://github.com/mapwatch/mapwatch - path of exile map tracking
     CNAME("mapwatch", "mapwatch.erosson.org.s3-website-us-east-1.amazonaws.com.", CF_PROXY_ON),
 
-    // https://freecbt.erosson.org
-    // https://github.com/erosson/freecbt - free cognitive behavioral therapy app
-    CNAME("freecbt", "freecbt.netlify.app."),
-
     // https://gitlab.com/erosson/travel-erosson-org - my travel photos
     // originally hosted on tumblr at https://wheres.erosson.org, moved to git+s3 for long-term archival at https://travel.erosson.org
     CNAME("travel", "travel.erosson.org.s3-website-us-east-1.amazonaws.com.", CF_PROXY_ON),
@@ -46,6 +42,12 @@ D("erosson.org", REG, DnsProvider(DNS),
     ///////////////////////////////////////////////////////
     IGNORE("test-tf"),
     IGNORE("cooking"),
+
+    // https://freecbt.erosson.org
+    // https://github.com/erosson/freecbt - free cognitive behavioral therapy app
+    // also at gifted-kowalevski-9b804a.netlify.app
+    // CNAME("freecbt", "freecbt.netlify.app."),
+    IGNORE("freecbt"),
 
     ///////////////////////////////////////////////////////
     // stuff that isn't widely used, and not maintained:

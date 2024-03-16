@@ -32,3 +32,8 @@ variable "build_config" {
   })
   description = "Cloudflare pages build config."
 }
+variable "production_branch" {
+  type = string
+  default = "main"
+  description = "Cloudflare production branch"
+}
