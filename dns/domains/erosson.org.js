@@ -18,13 +18,6 @@ D("erosson.org", REG, DnsProvider(DNS),
     // https://github.com/mapwatch/mapwatch - path of exile map tracking
     CNAME("mapwatch", "mapwatch.erosson.org.s3-website-us-east-1.amazonaws.com.", CF_PROXY_ON),
 
-    // https://gitlab.com/erosson/travel-erosson-org - my travel photos
-    // originally hosted on tumblr at https://wheres.erosson.org, moved to git+s3 for long-term archival at https://travel.erosson.org
-    CNAME("travel", "travel.erosson.org.s3-website-us-east-1.amazonaws.com.", CF_PROXY_ON),
-    CNAME("wheres", "domains.tumblr.com."),
-
-    A("finsat-qgis", "138.197.50.183"),
-
     ///////////////////////////////////////////////////////
     // stuff that isn't maintained, but still has some users:
     ///////////////////////////////////////////////////////
@@ -69,14 +62,18 @@ D("erosson.org", REG, DnsProvider(DNS),
     // https://github.com/erosson/keyboard-collector
     CNAME("keyboard-collector", "keyboard-collector.netlify.app."),
 
-    // https://github.com/erosson/meditate
-    CNAME("meditate", "gentle-hamster-b5f6bf.netlify.app."),
-
     // https://gitlab.com/erosson/piano-v2
     CNAME("piano-v2", "piano-v2.netlify.com."),
 
     // https://gitlab.com/erosson/random-items
     CNAME("random-items", "random-items-erosson-org.netlify.com."),
+
+    // https://gitlab.com/erosson/travel-erosson-org - my travel photos
+    // originally hosted on tumblr at https://wheres.erosson.org, moved to git+s3 for long-term archival at https://travel.erosson.org
+    CNAME("travel", "travel.erosson.org.s3-website-us-east-1.amazonaws.com.", CF_PROXY_ON),
+    CNAME("wheres", "domains.tumblr.com."),
+
+    A("finsat-qgis", "138.197.50.183"),
 
     ///////////////////////////////////////////////////////
     // miscellaneous dns config, not visible to users:
