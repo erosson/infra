@@ -42,12 +42,10 @@ D("erosson.org", REG, DnsProvider(DNS),
     ///////////////////////////////////////////////////////
     IGNORE("test-tf"),
     IGNORE("cooking"),
-
-    // https://freecbt.erosson.org
     // https://github.com/erosson/freecbt - free cognitive behavioral therapy app
-    // also at gifted-kowalevski-9b804a.netlify.app
-    // CNAME("freecbt", "freecbt.netlify.app."),
     IGNORE("freecbt"),
+    // https://github.com/erosson/vegas-wordle
+    IGNORE("vegas-wordle"),
 
     ///////////////////////////////////////////////////////
     // stuff that isn't widely used, and not maintained:
@@ -79,9 +77,6 @@ D("erosson.org", REG, DnsProvider(DNS),
 
     // https://gitlab.com/erosson/random-items
     CNAME("random-items", "random-items-erosson-org.netlify.com."),
-
-    // https://github.com/erosson/vegas-wordle
-    CNAME("vegas-wordle", "vegas-wordle.netlify.app."),
 
     ///////////////////////////////////////////////////////
     // miscellaneous dns config, not visible to users:

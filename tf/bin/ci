@@ -9,6 +9,7 @@ STACKS=(
 ./math2.swarmsim.com
 ./cooking.erosson.org
 ./freecbt.erosson.org
+./vegas-wordle.erosson.org
 )
 WORKSPACES=(
 ./git-repos
@@ -16,6 +17,7 @@ WORKSPACES=(
 ./math2.swarmsim.com
 ./cooking.erosson.org
 ./freecbt.erosson.org
+./vegas-wordle.erosson.org
 # no workspaces just yet. with personal projects, it's all in production all the time, amirite?
 # but if there were workspaces, it might look a bit like: 
 # ./test-tf.erosson.org/staging
