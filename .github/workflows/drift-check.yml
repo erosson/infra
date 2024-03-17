@@ -36,3 +36,16 @@ jobs:
       - run: ./tf/bin/ci
         env: 
           INFISICAL_TOKEN: ${{ secrets.INFISICAL_TOKEN }}
+
+  tests:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@4
+        with:
+          node-version: 20
+      - run: |
+          cd tests
+          yarn
+          yarn test --run
