@@ -62,5 +62,6 @@ resource "cloudflare_record" "main" {
   type = "CNAME"
   name = var.subdomain
   value = "${cloudflare_pages_project.main.name}.pages.dev."
+  proxied = var.proxied
   depends_on = [cloudflare_pages_domain.main]
 }

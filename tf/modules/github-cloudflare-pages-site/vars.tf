@@ -32,6 +32,11 @@ variable "build_config" {
   })
   description = "Cloudflare pages build config."
 }
+variable "proxied" {
+  description = "Cloudflare CDN proxy."
+  type = bool
+  default = false
+}
 variable "production_branch" {
   type = string
   default = "main"
