@@ -1,8 +1,8 @@
 D("zealgame.com", REG, DnsProvider(DNS),
 	DefaultTTL(1),
 	// https://github.com/erosson/zealgame.com
-	CNAME("www", "zealgame-com.pages.dev.", CF_PROXY_ON),
-	ALIAS("@", "zealgame-com.pages.dev.", CF_PROXY_ON),
+	IGNORE("www"),
+	IGNORE("@", "CNAME"),
 	MX("@", 5, "alt2.aspmx.l.google.com."),
 	MX("@", 10, "aspmx2.googlemail.com."),
 	MX("@", 1, "aspmx.l.google.com."),

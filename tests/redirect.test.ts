@@ -20,6 +20,8 @@ const redirects: readonly RedirectData[] = [
 
     // ...domainRedirect('warswarms.com', 'war-swarms.com'),
     ...domainRedirect('warswarms.com', 'warswarm.com'),
+
+    ...selfRedirect('zealgame.com'),
 ]
 
 function selfRedirect(domain: string): readonly RedirectData[] {
