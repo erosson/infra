@@ -2,3 +2,4 @@
 set -eu
 ./dns/bin/preview --expect-no-changes
 ./tf/bin/ci
+(cd tests && yarn && yarn test --run)
