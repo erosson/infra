@@ -39,6 +39,8 @@ D("erosson.org", REG, DnsProvider(DNS),
     IGNORE("freecbt"),
     // https://github.com/erosson/vegas-wordle
     IGNORE("vegas-wordle"),
+    // https://gitlab.com/erosson/erosson-org
+    IGNORE("cf-www"),
 
     ///////////////////////////////////////////////////////
     // stuff that isn't widely used, and not maintained:

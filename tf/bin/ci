@@ -5,6 +5,7 @@ cd "`dirname "$0"`/.."
 
 STACKS=(
 ./git-repos
+./www.erosson.org
 ./test-tf.erosson.org
 ./math2.swarmsim.com
 ./cooking.erosson.org
@@ -13,6 +14,7 @@ STACKS=(
 )
 WORKSPACES=(
 ./git-repos
+./www.erosson.org
 ./test-tf.erosson.org
 ./math2.swarmsim.com
 ./cooking.erosson.org
