@@ -36,11 +36,11 @@ mkdir -p "$TMPGIT/release"
 cp -a "$DIST/." "$TMPGIT/release"
 cd "$TMPGIT"
 cat <<EOF > README.md
-Deploy the contents of \`/release\` to any static site webhost. No additional build step required - this branch is a snapshot of the \`$CURRENT_BRANCH\` branch's latest build output.
+This branch is generated from the \`$CURRENT_BRANCH\` branch's latest build output. Your static webhost should watch this branch for changes, and deploy the contents of \`/release\` with no build step.
 
-_Why?_ This branch decouples build/CI from webhosting/deployment. It's much easier to switch webhosts later!
+_Why?_ This decouples build/CI from webhosting/deployment. Much easier to switch webhosts later!
 
-Created using https://github.com/erosson/infra/blob/main/tf/modules/git-release-branch
+Generated using https://github.com/erosson/infra/blob/main/tf/modules/git-release-branch
 
     $(basename $0) $@
 EOF

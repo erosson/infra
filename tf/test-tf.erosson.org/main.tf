@@ -32,6 +32,7 @@ resource "github_repository_file" "index-html" {
 <html>
 <body>
 hello, tf-generated-index!
+
 <a href="https://github.com/${data.github_repository.main.full_name}">github.com/${data.github_repository.main.full_name}</a>
 </body>
 </html>
@@ -51,7 +52,7 @@ resource "cloudflare_pages_project" "main" {
   account_id = local.cloudflare_account_id
   build_config {
     build_command = "true"
-    destination_dir = "/"
+    destination_dir = "/release"
     root_dir = "/"
   }
   source {
