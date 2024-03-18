@@ -1,0 +1,24 @@
+name: "example build"
+
+on:
+  push:
+    branches: ["main"]
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      # pass arguments to a script fetched by curl
+      - run: |
+          git config --global user.email "erosson-infra@erosson.org"
+          git config --global user.name "erosson/infra"
+          curl -sSL https://raw.githubusercontent.com/erosson/infra/main/tf/modules/git-release-branch | bash -s -- ./public main.release
+          git push -f origin main.release
