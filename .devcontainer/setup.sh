@@ -4,6 +4,8 @@ cd "`dirname "$0"`/.."
 
 cp -f git-hooks/* .git/hooks/
 
+echo 'PATH=$PATH:/usr/lib/git-core/' >> ~/.bashrc
+
 which dnscontrol || (
 wget -O /tmp/dnscontrol.deb https://github.com/StackExchange/dnscontrol/releases/download/v4.7.3/dnscontrol-4.7.3.amd64.deb
 sudo dpkg -i /tmp/dnscontrol.deb
