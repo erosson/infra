@@ -1,6 +1,6 @@
 #!/bin/bash
 set -eu
-cd "$(dirname "$0")"
+# cd "$(dirname "$0")"
 usage() {
     echo "$@"
     echo "overwrites local git branch BRANCH_NAME with a single commit containing the contents of DIRECTORY."
@@ -10,7 +10,8 @@ usage() {
 
 [ "$#" == "1" ] || [ "$#" == "2" ] || [ "$#" == "3" ] || usage
 DIST="$1"
-RELEASE_BRANCH="${2:-$(git branch --show-current).release}"
+CURRENT_BRANCH="$(git branch --show-current)"
+RELEASE_BRANCH="${2:-${CURRENT_BRANCH}.release}"
 COMMIT_MSG="${3:-release of branch $(git branch --show-current)}"
 [ -d "$DIST" ] || (usage "not a directory: $DIST")
 [ "" != "$RELEASE_BRANCH" ] || (usage "must be nonempty: $RELEASE_BRANCH")
@@ -21,7 +22,7 @@ echo DIST="$DIST" RELEASE_BRANCH="$RELEASE_BRANCH" COMMIT_MSG="$COMMIT_MSG"
 # - init an empty temporary git repository
 # - commit the released files to the new repo
 # - (force-)push the temp repo back to the main repository's release branch
-SELF="$(pwd)"
+SELF="$(git rev-parse --show-toplevel)"
 TMPGIT="$(mktemp -d)"
 set -x
 git init "$TMPGIT"
@@ -31,8 +32,18 @@ git init "$TMPGIT"
 # have to figure out how to clear the release branch's history
 #git subtree push --no-verify --prefix="$DIST"
 
-cp -a "$DIST/." "$TMPGIT"
+mkdir -p "$TMPGIT/release"
+cp -a "$DIST/." "$TMPGIT/release"
 cd "$TMPGIT"
+cat <<EOF > README.md
+Deploy the contents of \`/release\` to any static site webhost. No additional build step required - this branch is a snapshot of the \`$CURRENT_BRANCH\` branch's latest build output.
+
+_Why?_ This branch decouples build/CI from webhosting/deployment. It's much easier to switch webhosts later!
+
+Created using https://github.com/erosson/infra/blob/main/tf/modules/git-release-branch
+
+    $(basename $0) $@
+EOF
 git status
 git checkout --orphan tmp-release
 git add -A
