@@ -34,11 +34,11 @@ git init "$TMPGIT"
 cp -a "$DIST/." "$TMPGIT"
 cd "$TMPGIT"
 git status
-git checkout --orphan main
+git checkout --orphan tmp-release
 git add -A
 git commit -m "$COMMIT_MSG"
 
-git push --no-verify -f "$SELF" main:"$RELEASE_BRANCH"
+git push --no-verify -f "$SELF" tmp-release:"$RELEASE_BRANCH"
 cd "$SELF"
 rm -rf "$TMPGIT"
 
