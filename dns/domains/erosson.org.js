@@ -84,6 +84,9 @@ D("erosson.org", REG, DnsProvider(DNS),
     // https://keybase.io/erosson - keybase dns verification
     TXT("@", "keybase-site-verification=EncCl-wXPMH_QfyvaiYukWq9bUPykA8WJAKeKi2KOIM"),
 
+    // google search console site verification
+    TXT("@", "google-site-verification=DnQIaVLGOb-OuuWglt5iz_BEkhZkh1t4qsVUZkdz4sQ"),
+
     // erosson.org gmail configuration, I think
     CNAME("mail", "ghs.google.com."),
     MX("@", 1, "aspmx.l.google.com."),
