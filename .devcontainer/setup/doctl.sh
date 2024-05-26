@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 set -eux
 
 # https://docs.digitalocean.com/reference/doctl/how-to/install/#install-2
