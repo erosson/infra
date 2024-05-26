@@ -17,6 +17,7 @@
 {$DOMAIN_PREFIX}vegas-wordle.erosson.org{$DOMAIN_SUFFIX},
 {$DOMAIN_PREFIX}freecbt.erosson.org{$DOMAIN_SUFFIX},
 {$DOMAIN_PREFIX}www.zealgame.com{$DOMAIN_SUFFIX} {
+    log
     # {host}: https://caddyserver.com/docs/caddyfile/concepts#placeholders
     root * /var/www/{host}
     file_server
@@ -25,10 +26,12 @@
 # https://caddyserver.com/docs/caddyfile/patterns#redirect-www-subdomain
 # zealgame.com -> www.zealgame.com
 {$DOMAIN_PREFIX}zealgame.com{$DOMAIN_SUFFIX} {
+    log
     redir {scheme}://www.{hostport}{uri}
 }
 
 :80, :443, :2015 {
+    log
     root * /var/www/error
     file_server
     rewrite * /404.html
