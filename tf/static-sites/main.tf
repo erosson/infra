@@ -86,7 +86,8 @@ resource "digitalocean_app" "main" {
     # we had a long list of these. ugh...!
     # domain { name = "docker-ops.erosson.org"} 
 
-    # this is more complex, but avoids redundancy:
+    # this is more complex, but avoids redundancy.
+    # thanks, https://www.techtarget.com/searchitoperations/tutorial/Simplify-code-with-for_each-and-dynamic-blocks-in-Terraform#:~:text=In%20Terraform%2C%20dynamic%20blocks%20let,in%20a%20map%20or%20list.
     dynamic "domain" {
       for_each=local.full_domains
       content {
