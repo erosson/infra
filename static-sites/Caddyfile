@@ -24,6 +24,8 @@
 
 # https://caddyserver.com/docs/caddyfile/patterns#redirect-www-subdomain
 # zealgame.com -> www.zealgame.com
+# docker.zealgame.com -> docker-www.zealgame.com
+{$DOMAIN_PREFIX}docker.zealgame.com{$DOMAIN_SUFFIX},
 {$DOMAIN_PREFIX}zealgame.com{$DOMAIN_SUFFIX} {
     redir {scheme}://www.{hostport}{uri}
 }
