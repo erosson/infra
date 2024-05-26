@@ -1,3 +1,49 @@
+###############################################################################
+# Each new site must add a bit of config below.
+# These should match the Caddyfile and Dockerfile in `/static-sites`, too.
+###############################################################################
+locals {
+  # generate github-actions secrets for each child repository. Grants permissions to build the combined image.
+  # many of them look like domains, but I promise they're repo names. like https://github.com/erosson/math2.swarmsim.com
+  github_repositories = [
+    "math2.swarmsim.com",
+    "cooking.erosson.org",
+    "vegas-wordle",
+    "freecbt",
+    "zealgame.com",
+  ]
+  # generate dns records and digitalocean-app domain entries
+  domains = [
+    {sub="docker-ops", domain="erosson.org", zone_id=local.erosson_org_zone_id},
+    {sub="ops", domain="erosson.org", zone_id=local.erosson_org_zone_id},
+    {sub="docker-math2", domain="swarmsim.com", zone_id=local.swarmsim_com_zone_id},
+    {sub="docker-cooking", domain="erosson.org", zone_id=local.erosson_org_zone_id},
+    {sub="docker-freecbt", domain="erosson.org", zone_id=local.erosson_org_zone_id},
+    {sub="docker-vegas-wordle", domain="erosson.org", zone_id=local.erosson_org_zone_id},
+    {sub="docker-www", domain="zealgame.com", zone_id=local.zealgame_com_zone_id},
+    {sub="docker", domain="zealgame.com", zone_id=local.zealgame_com_zone_id},
+  ]
+}
+
+###############################################################################
+# New sites shouldn't need to modify anything after this point.
+###############################################################################
+locals {
+  erosson_org_zone_id = "7c06b35c2392935ebb0653eaf94a3e70" // erosson.org
+  swarmsim_com_zone_id = "2526e11f0b20a0e69b0fcfb1e5a21d21" // swarmsim.com
+  zealgame_com_zone_id = "ff0d132b2612531ac86aa3fb825d6415" // zealgame.com
+  cname_value = replace(digitalocean_app.main.default_ingress, "https://", "")
+  proxied = "true"
+  full_domains = [ for d in local.domains: merge(d, {full_domain="${d.sub == "" ? "" : "${d.sub}."}${d.domain}"})]
+}
+
+resource "github_actions_secret" "main" {
+  for_each = { for index, r in local.github_repositories: r => r }
+  repository = each.value
+  secret_name = "GH_TOKEN_INFRA_BUILD_DOCKER_IMAGE"
+  plaintext_value = var.GITHUB_TOKEN_INFRA_BUILD_DOCKER_IMAGE
+}
+
 resource "digitalocean_app" "main" {
   spec {
     name   = "erosson-infra-static-sites"
@@ -36,77 +82,26 @@ resource "digitalocean_app" "main" {
       disabled = false
       rule = "DOMAIN_FAILED"
     }
-    domain { name = "docker-ops.erosson.org" }
-    domain { name = "ops.erosson.org" }
-    domain { name = "docker-math2.swarmsim.com" }
-    domain { name = "docker-cooking.erosson.org" }
-    domain { name = "docker-freecbt.erosson.org" }
-    domain { name = "docker-vegas-wordle.erosson.org" }
-    domain { name = "docker-www.zealgame.com" }
-    domain { name = "docker.zealgame.com" }
+
+    # we had a long list of these. ugh...!
+    # domain { name = "docker-ops.erosson.org"} 
+
+    # this is more complex, but avoids redundancy:
+    dynamic "domain" {
+      for_each=local.full_domains
+      content {
+        name = domain.value.full_domain
+      }
+    }
   }
 }
 
-locals {
-  erosson_org_zone_id = "7c06b35c2392935ebb0653eaf94a3e70" // erosson.org
-  swarmsim_com_zone_id = "2526e11f0b20a0e69b0fcfb1e5a21d21" // swarmsim.com
-  zealgame_com_zone_id = "ff0d132b2612531ac86aa3fb825d6415" // zealgame.com
-  cname_value = replace(digitalocean_app.main.default_ingress, "https://", "")
-  proxied = "true"
-}
-resource "cloudflare_record" "ops" {
-  zone_id = local.erosson_org_zone_id
+resource "cloudflare_record" "main" {
+  # https://stackoverflow.com/questions/58594506/how-to-for-each-through-a-listobjects-in-terraform-0-12 : "using for_each on a list of objects"
+  for_each = { for index, d in local.domains: "${d.sub}.${d.domain}" => d }
+  zone_id = each.value.zone_id
   type = "CNAME"
-  name = "ops"
-  value = local.cname_value
-  proxied = local.proxied
-}
-resource "cloudflare_record" "docker-ops" {
-  zone_id = local.erosson_org_zone_id
-  type = "CNAME"
-  name = "docker-ops"
-  value = local.cname_value
-  proxied = local.proxied
-}
-resource "cloudflare_record" "math2" {
-  zone_id = local.swarmsim_com_zone_id
-  type = "CNAME"
-  name = "docker-math2"
-  value = local.cname_value
-  proxied = local.proxied
-}
-resource "cloudflare_record" "cooking" {
-  zone_id = local.erosson_org_zone_id
-  type = "CNAME"
-  name = "docker-cooking"
-  value = local.cname_value
-  proxied = local.proxied
-}
-resource "cloudflare_record" "vegas-wordle" {
-  zone_id = local.erosson_org_zone_id
-  type = "CNAME"
-  name = "docker-vegas-wordle"
-  value = local.cname_value
-  proxied = local.proxied
-}
-resource "cloudflare_record" "freecbt" {
-  zone_id = local.erosson_org_zone_id
-  type = "CNAME"
-  name = "docker-freecbt"
-  value = local.cname_value
-  proxied = local.proxied
-}
-resource "cloudflare_record" "zealgame" {
-  zone_id = local.zealgame_com_zone_id
-  type = "CNAME"
-  name = "docker"
-  value = local.cname_value
-  proxied = local.proxied
-}
-resource "cloudflare_record" "www-zealgame" {
-  zone_id = local.zealgame_com_zone_id
-  type = "CNAME"
-  name = "docker-www"
+  name = each.value.sub
   value = local.cname_value
   proxied = local.proxied
 }

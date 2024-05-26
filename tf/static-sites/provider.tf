@@ -8,6 +8,10 @@ terraform {
       source  = "digitalocean/digitalocean"
       version = "~> 2.38.0"
     }
+    github = {
+      source  = "hashicorp/github"
+      version = "~> 6.2.1"
+    }
   }
 
   // Not actually amazon S3. cloudflare R2 - aws-S3-compatible.
@@ -28,6 +32,22 @@ terraform {
   }
 }
 
+# https://github.com/erosson/infra/blob/main/tf/static-sites/provider.tf
+variable "GITHUB_TOKEN_INFRA_BUILD_DOCKER_IMAGE" {
+  # Other static-site repositories have this secret added to their actions.
+  # It allows them to trigger this repository's static-sites workflow.
+  # Whenever a "child" static-site is updated, we rebuild and redeploy the combined "parent" image.
+  #
+  # Why?
+  # Dedicated static-site hosts have too many obstacles - creating each project, redirects, poor terraform integration, huge vendor lock-in...
+  # S3 or other object-store hosts fall down the moment you have to do redirects or anything remotely fancy.
+  # Good old rsync-on-change creates a "pet" server by maintaining state - it's not resilient if that server ever goes down.
+  # One docker image per static-site is quite expensive for all webhosts I've looked at; they charge per container.
+  # This couples us to Github-actions more tightly, not ideal - but otherwise a combined-static-sites Docker image has been a dream so far!
+  # 
+  # Created at: https://github.com/settings/personal-access-tokens/3347136
+  # https://docs.github.com/en/rest/repos/repos?apiVersion=2022-11-28#create-a-repository-dispatch-event
+}
 provider "aws" {
   region = "us-east-1"
 }
