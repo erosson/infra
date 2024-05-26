@@ -47,8 +47,14 @@
 }
 
 :80, :443, :2015 {
+    # tolerate health checks without any specific vhost. digitalocean (and other providers) need this for deployment to succeed
+    respond /healthz 200 {
+        body "大丈夫です。"
+    }
+
+    # any other path fails
     root * /sites/error
     file_server
+    # rewrite * /404-vhost.html
     respond 404
-    rewrite * /404-vhost.html
 }
