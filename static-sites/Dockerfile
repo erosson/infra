@@ -6,6 +6,7 @@ COPY --from=ghcr.io/erosson/cooking.erosson.org:main /usr/share/caddy /sites/coo
 COPY --from=ghcr.io/erosson/vegas-wordle:main /usr/share/caddy /sites/vegas-wordle.erosson.org
 COPY --from=ghcr.io/erosson/freecbt.erosson.org:master /usr/share/caddy /sites/freecbt.erosson.org
 COPY --from=ghcr.io/erosson/zealgame.com:main /usr/share/caddy /sites/www.zealgame.com
+COPY ops.erosson.org /sites/ops.erosson.org
 
 RUN for host in $(ls /sites); do \
     mkdir -p /var/www ;\
@@ -17,5 +18,6 @@ RUN for host in $(ls /sites); do \
     fi ;\
     done
 
-COPY error /var/www/error
+COPY error /sites/error
+
 COPY Caddyfile /etc/caddy/Caddyfile

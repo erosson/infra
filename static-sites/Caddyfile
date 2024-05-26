@@ -22,16 +22,33 @@
     file_server
 }
 
+# ops/debug pages are just like most other pages, but with basicauth
+{$DOMAIN_PREFIX}docker-ops.erosson.org{$DOMAIN_SUFFIX},
+{$DOMAIN_PREFIX}ops.erosson.org{$DOMAIN_SUFFIX} {
+    root * /var/www/{host}
+    file_server
+
+    basicauth /debug/* {
+        # passwords must be hashed before adding them to this file. https://caddyserver.com/docs/caddyfile/directives/basicauth
+        # `docker run caddy caddy hash-password -p PASSWORD`
+        # shame on me for putting a password hash in public git, but production's different, and this doesn't need to be very secure
+        {$OPS_BASICAUTH:evan $2a$14$b3ihEIX.8Eq2IvBJ8HyLKew9/2X1SI/1X67HbAFzZF8iZwTTq4fwW}
+    }
+}
+
 # https://caddyserver.com/docs/caddyfile/patterns#redirect-www-subdomain
 # zealgame.com -> www.zealgame.com
 # docker.zealgame.com -> docker-www.zealgame.com
-{$DOMAIN_PREFIX}docker.zealgame.com{$DOMAIN_SUFFIX},
 {$DOMAIN_PREFIX}zealgame.com{$DOMAIN_SUFFIX} {
-    redir {scheme}://www.{hostport}{uri}
+    redir {scheme}://www.zealgame.com{$DOMAIN_SUFFIX}{uri}
+}
+{$DOMAIN_PREFIX}docker.zealgame.com{$DOMAIN_SUFFIX} {
+    redir {scheme}://docker-www.zealgame.com{$DOMAIN_SUFFIX}{uri}
 }
 
 :80, :443, :2015 {
-    root * /var/www/error
+    root * /sites/error
     file_server
-    rewrite * /404.html
+    respond 404
+    rewrite * /404-vhost.html
 }

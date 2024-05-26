@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<style>
+    @media (prefers-color-scheme: dark) {
+
+        html,
+        body {
+            color: white;
+            background-color: black;
+        }
+
+        a {
+            color: pink;
+        }
+
+        a:visited {
+            color: cyan;
+        }
+    }
+</style>
+
+<body>
+    <h1>docker-ops.erosson.org</h1>
+    <p>Here's a list of some domains maintained with docker. It's maintained manually, so might be incomplete</p>
+    <ul id="domains">
+    </ul>
+</body>
+
+<script type="module">
+    const rawDomains = [
+        "math2.swarmsim.com",
+        "docker-math2.swarmsim.com",
+        "cooking.erosson.org",
+        "docker-cooking.erosson.org",
+        "freecbt.erosson.org",
+        "docker-freecbt.erosson.org",
+        "vegas-wordle.erosson.org",
+        "docker-vegas-wordle.erosson.org",
+        "www.zealgame.com",
+        "docker-www.zealgame.com",
+        "zealgame.com",
+        "docker.zealgame.com",
+    ]
+    const isDev = /\.localhost$/.test(document.location.hostname) && document.location.port === '2015'
+    console.log(document.location, isDev)
+    const protocol = isDev ? 'http://' : 'https://'
+    const suffix = isDev ? '.localhost:2015' : ''
+    const domains = rawDomains.map(d => `${protocol}${d}${suffix}`)
+    const listEl = document.getElementById('domains')
+    domains.forEach(async domain => {
+        const el = document.createElement('li')
+        listEl.appendChild(el)
+        const a = document.createElement('a')
+        a.href = domain
+        a.target = '_blank'
+        a.append(domain)
+        el.append(a)
+        // ugh, cors
+        // el.append(': ')
+        // try {
+        //     const res = await fetch(domain, { mode: "no-cors" })
+        //     el.append('fetch success')
+        // }
+        // catch (e) {
+        //     el.append(`fetch fail: ${e}`)
+        // }
+    })
+</script>
+
+</html>
