@@ -55,3 +55,9 @@ jobs:
           subject-digest: ${{ steps.push.outputs.digest }}
           push-to-registry: true
       
+      - run: |
+          .devcontainer/setup/doctl.sh
+          .devcontainer/setup/infisical.sh
+      - run: ./tf/static-sites/deploy
+        env: 
+          INFISICAL_TOKEN: ${{ secrets.INFISICAL_TOKEN }}
