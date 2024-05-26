@@ -12,6 +12,7 @@ STACKS=(
 ./freecbt.erosson.org
 ./vegas-wordle.erosson.org
 ./zealgame.com
+./static-sites
 )
 WORKSPACES=(
 ./git-repos
@@ -22,6 +23,7 @@ WORKSPACES=(
 ./freecbt.erosson.org
 ./vegas-wordle.erosson.org
 ./zealgame.com
+./static-sites
 # no workspaces just yet. with personal projects, it's all in production all the time, amirite?
 # but if there were workspaces, it might look a bit like: 
 # ./test-tf.erosson.org/staging
