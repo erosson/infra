@@ -1,12 +1,12 @@
 terraform {
   required_providers {
-    # aws = {
-    #   source  = "hashicorp/aws"
-    #   version = "~> 5.0"
-    # }
     cloudflare = {
       source = "cloudflare/cloudflare"
       version = "4.20.0"
+    }
+    digitalocean = {
+      source  = "digitalocean/digitalocean"
+      version = "~> 2.38.0"
     }
   }
 
@@ -30,4 +30,7 @@ terraform {
 
 provider "aws" {
   region = "us-east-1"
+}
+provider "digitalocean" {
+  # requires env DIGITALOCEAN_TOKEN. https://registry.terraform.io/providers/digitalocean/digitalocean/latest/docs
 }
