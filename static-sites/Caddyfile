@@ -50,11 +50,12 @@
     # route{} uses the order below, not caddy's default order. without this, `error` is higher priority and health checks all 404.
     route {
         # tolerate health checks without any specific vhost. digitalocean (and other providers) need this for deployment to succeed
-        respond /healthz 200 {
+        # respond /healthz 200 {
+        respond * 200 {
             body "大丈夫です。"
         }
         # any other path without a valid vhost fails
-        error * "Not found" 404
+        # error * "Not found" 404
     }
     handle_errors {
         root * /sites/error
