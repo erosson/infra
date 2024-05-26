@@ -1,0 +1,30 @@
+# For easier testing, site addresses are different in dev and prod.
+#
+# In dev, when running with `docker compose up --build`:
+# * You'll connect to `http://{host}.localhost:2015`. For example, `http://math2.swarmsim.com.localhost:2015`. "http", with no "s".
+# * The files `/var/www/{host}.localhost` will exist.
+#
+# In prod, when running the CI-built container:
+# * You'll connect to `https://{host}`. For example, `https://math2.swarmsim.com`. "https", with an "s".
+# The files `/var/www/{host}.localhost` will not exist.
+{$DOMAIN_PREFIX}math2.swarmsim.com{$DOMAIN_SUFFIX},
+{$DOMAIN_PREFIX}cooking.erosson.org{$DOMAIN_SUFFIX},
+{$DOMAIN_PREFIX}vegas-wordle.erosson.org{$DOMAIN_SUFFIX},
+{$DOMAIN_PREFIX}freecbt.erosson.org{$DOMAIN_SUFFIX},
+{$DOMAIN_PREFIX}www.zealgame.com{$DOMAIN_SUFFIX} {
+    # {host}: https://caddyserver.com/docs/caddyfile/concepts#placeholders
+    root * /var/www/{host}
+    file_server
+}
+
+# https://caddyserver.com/docs/caddyfile/patterns#redirect-www-subdomain
+# zealgame.com -> www.zealgame.com
+{$DOMAIN_PREFIX}zealgame.com{$DOMAIN_SUFFIX} {
+    redir {scheme}://www.{hostport}{uri}
+}
+
+:80, :443, :2015 {
+    root * /var/www/error
+    file_server
+    rewrite * /404.html
+}

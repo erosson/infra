@@ -1,0 +1,11 @@
+services:
+  main:
+    build:
+      context: .
+      args:
+        - NO_LOCALHOST=1
+    environment:
+      - DOMAIN_PREFIX=http://
+      - DOMAIN_SUFFIX=.localhost:2015
+    ports:
+      - 2015:2015
