@@ -2,6 +2,8 @@ D("zealgame.com", REG, DnsProvider(DNS),
 	DefaultTTL(1),
 	// https://github.com/erosson/zealgame.com
 	IGNORE("www"),
+	IGNORE("docker"),
+	IGNORE("docker-www"),
 	IGNORE("@", "CNAME"),
 	MX("@", 5, "alt2.aspmx.l.google.com."),
 	MX("@", 10, "aspmx2.googlemail.com."),
