@@ -47,14 +47,18 @@
 }
 
 :80, :443, :2015 {
-    # tolerate health checks without any specific vhost. digitalocean (and other providers) need this for deployment to succeed
-    respond /healthz 200 {
-        body "大丈夫です。"
+    # route{} uses the order below, not caddy's default order. without this, `error` is higher priority and health checks all 404.
+    route {
+        # tolerate health checks without any specific vhost. digitalocean (and other providers) need this for deployment to succeed
+        respond /healthz 200 {
+            body "大丈夫です。"
+        }
+        # any other path without a valid vhost fails
+        error * "Not found" 404
     }
-
-    # any other path fails
-    root * /sites/error
-    file_server
-    # rewrite * /404-vhost.html
-    respond 404
+    handle_errors {
+        root * /sites/error
+        rewrite * /404-vhost.html
+        file_server
+    }
 }
