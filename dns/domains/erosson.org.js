@@ -42,6 +42,8 @@ D("erosson.org", REG, DnsProvider(DNS),
     // https://gitlab.com/erosson/erosson-org
     IGNORE("cf-www"),
 
+    IGNORE("docker-ops"),
+    IGNORE("ops"),
     IGNORE("docker-cooking"),
     IGNORE("docker-vegas-wordle"),
     IGNORE("docker-freecbt"),
