@@ -56,6 +56,7 @@
         # any other path without a valid vhost fails
         error * "Not found" 404
     }
+    # TODO: this affects other domains too, oops
     handle_errors {
         root * /sites/error
         rewrite * /404-vhost.html
