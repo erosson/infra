@@ -27,6 +27,9 @@ D("swarmsim.com", REG, DnsProvider(DNS),
 	TXT("@", "google-site-verification=huueYzqrM57YM5ogbWfTfrgxMPOtLuwIBf6l82rGrjE"),
 
 	// terraform handles others
+	IGNORE("docker"),
+	IGNORE("docker-www"),
+	IGNORE("docker-preprod"),
 	IGNORE("docker-math2"),
 	IGNORE("docker-math"),
 	IGNORE("math2")
