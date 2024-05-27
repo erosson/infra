@@ -8,15 +8,16 @@
 # * You'll connect to `https://{host}`. For example, `https://math2.swarmsim.com`. "https", with an "s".
 # The files `/var/www/{host}.localhost` will not exist.
 {$DOMAIN_PREFIX}docker-math2.swarmsim.com{$DOMAIN_SUFFIX},
-{$DOMAIN_PREFIX}docker-math.swarmsim.com{$DOMAIN_SUFFIX},
-{$DOMAIN_PREFIX}docker-cooking.erosson.org{$DOMAIN_SUFFIX},
-{$DOMAIN_PREFIX}docker-vegas-wordle.erosson.org{$DOMAIN_SUFFIX},
-{$DOMAIN_PREFIX}docker-freecbt.erosson.org{$DOMAIN_SUFFIX},
-{$DOMAIN_PREFIX}docker-www.zealgame.com{$DOMAIN_SUFFIX},
 {$DOMAIN_PREFIX}math2.swarmsim.com{$DOMAIN_SUFFIX},
+{$DOMAIN_PREFIX}docker-math.swarmsim.com{$DOMAIN_SUFFIX},
+{$DOMAIN_PREFIX}math.swarmsim.com{$DOMAIN_SUFFIX},
+{$DOMAIN_PREFIX}docker-cooking.erosson.org{$DOMAIN_SUFFIX},
 {$DOMAIN_PREFIX}cooking.erosson.org{$DOMAIN_SUFFIX},
+{$DOMAIN_PREFIX}docker-vegas-wordle.erosson.org{$DOMAIN_SUFFIX},
 {$DOMAIN_PREFIX}vegas-wordle.erosson.org{$DOMAIN_SUFFIX},
+{$DOMAIN_PREFIX}docker-freecbt.erosson.org{$DOMAIN_SUFFIX},
 {$DOMAIN_PREFIX}freecbt.erosson.org{$DOMAIN_SUFFIX},
+{$DOMAIN_PREFIX}docker-www.zealgame.com{$DOMAIN_SUFFIX},
 {$DOMAIN_PREFIX}www.zealgame.com{$DOMAIN_SUFFIX} {
     # {host}: https://caddyserver.com/docs/caddyfile/concepts#placeholders
     root * /var/www/{host}
@@ -24,7 +25,9 @@
 }
 
 {$DOMAIN_PREFIX}docker-www.swarmsim.com{$DOMAIN_SUFFIX},
-{$DOMAIN_PREFIX}docker-preprod.swarmsim.com{$DOMAIN_SUFFIX} {
+{$DOMAIN_PREFIX}www.swarmsim.com{$DOMAIN_SUFFIX},
+{$DOMAIN_PREFIX}docker-preprod.swarmsim.com{$DOMAIN_SUFFIX},
+{$DOMAIN_PREFIX}preprod.swarmsim.com{$DOMAIN_SUFFIX} {
     root * /var/www/{host}
     file_server
 
@@ -79,6 +82,14 @@
 {$DOMAIN_PREFIX}*.xmarkedgame.com{$DOMAIN_SUFFIX},
 {$DOMAIN_PREFIX}xmarkedgame.com{$DOMAIN_SUFFIX} {
     redir https://www.x-marked.com{uri}
+}
+
+{$DOMAIN_PREFIX}*.warswarm.com{$DOMAIN_SUFFIX},
+{$DOMAIN_PREFIX}warswarm.com{$DOMAIN_SUFFIX},
+{$DOMAIN_PREFIX}*.war-swarms.com{$DOMAIN_SUFFIX},
+{$DOMAIN_PREFIX}war-swarms.com{$DOMAIN_SUFFIX},
+{$DOMAIN_PREFIX}warswarms.com{$DOMAIN_SUFFIX} {
+    redir https://www.warswarms.com{uri}
 }
 
 :80, :443, :2015 {

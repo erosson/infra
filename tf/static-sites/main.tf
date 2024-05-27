@@ -41,6 +41,7 @@ locals {
     {sub="docker-www", domain="swarmsim.com", zone_id=local.swarmsim_com_zone_id},
     {sub="docker", domain="swarmsim.com", zone_id=local.swarmsim_com_zone_id},
     {sub="docker-preprod", domain="swarmsim.com", zone_id=local.swarmsim_com_zone_id},
+    {sub="math", domain="swarmsim.com", zone_id=local.swarmsim_com_zone_id},
   ]
 }
 
