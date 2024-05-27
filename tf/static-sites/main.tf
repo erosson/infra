@@ -36,6 +36,7 @@ locals {
     {sub="", domain="xmarkedgame.com", zone_id=local.xmarkedgame_com_zone_id},
     {sub="www", domain="xmarkedgame.com", zone_id=local.xmarkedgame_com_zone_id},
     {sub="docker-math", domain="swarmsim.com", zone_id=local.swarmsim_com_zone_id},
+    {sub="", domain="erosson.org", zone_id=local.erosson_org_zone_id},
   ]
 }
 

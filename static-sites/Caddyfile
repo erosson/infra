@@ -57,7 +57,8 @@
 {$DOMAIN_PREFIX}*.erosson.us{$DOMAIN_SUFFIX},
 {$DOMAIN_PREFIX}erosson.us{$DOMAIN_SUFFIX},
 {$DOMAIN_PREFIX}*.erosson.com{$DOMAIN_SUFFIX},
-{$DOMAIN_PREFIX}erosson.com{$DOMAIN_SUFFIX} {
+{$DOMAIN_PREFIX}erosson.com{$DOMAIN_SUFFIX},
+{$DOMAIN_PREFIX}erosson.org{$DOMAIN_SUFFIX} {  # bare domain, no www
     redir https://www.erosson.org{uri}
 }
 

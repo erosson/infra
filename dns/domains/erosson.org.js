@@ -10,7 +10,6 @@ D("erosson.org", REG, DnsProvider(DNS),
     // https://www.erosson.org
     // https://gitlab.com/erosson/erosson-org - my personal website
     // the repo contains a bunch of terraform stuff. Most of it is DNS - no longer used, this replaces it. There's some s3 bucket config there too though!
-    ALIAS("@", "erosson.org.s3-website-us-east-1.amazonaws.com.", CF_PROXY_ON),
     CNAME("www", "www.erosson.org.s3-website-us-east-1.amazonaws.com.", CF_PROXY_ON),
     CNAME("piano", "piano.erosson.org.s3-website-us-east-1.amazonaws.com.", CF_PROXY_ON),
 
@@ -42,6 +41,9 @@ D("erosson.org", REG, DnsProvider(DNS),
     // https://gitlab.com/erosson/erosson-org
     IGNORE("cf-www"),
 
+    IGNORE("@", "ALIAS"),
+    IGNORE("@", "CNAME"),
+    IGNORE("@", "A"),
     IGNORE("docker-ops"),
     IGNORE("ops"),
     IGNORE("docker-cooking"),
