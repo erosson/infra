@@ -1,5 +1,6 @@
 D("warswarms.com", REG, DnsProvider(DNS),
 	DefaultTTL(1),
+	// these are hosted on firebase
 	A("beta", "151.101.65.195"),
 	A("beta", "151.101.1.195"),
 	A("dev", "151.101.65.195"),

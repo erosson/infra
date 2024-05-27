@@ -42,6 +42,12 @@ locals {
     {sub="docker", domain="swarmsim.com", zone_id=local.swarmsim_com_zone_id},
     {sub="docker-preprod", domain="swarmsim.com", zone_id=local.swarmsim_com_zone_id},
     {sub="math", domain="swarmsim.com", zone_id=local.swarmsim_com_zone_id},
+    {sub="", domain="warswarm.com", zone_id=local.warswarm_com_zone_id},
+    {sub="www", domain="warswarm.com", zone_id=local.warswarm_com_zone_id},
+    {sub="news", domain="warswarm.com", zone_id=local.warswarm_com_zone_id},
+    {sub="", domain="war-swarms.com", zone_id=local.war_swarms_com_zone_id},
+    {sub="www", domain="war-swarms.com", zone_id=local.war_swarms_com_zone_id},
+    {sub="news", domain="war-swarms.com", zone_id=local.war_swarms_com_zone_id},
   ]
 }
 
@@ -59,6 +65,9 @@ locals {
   evanrosson_com_zone_id = "d647fab55890593346d839d4cd92679a" // evanrosson.com
   evanrosson_org_zone_id = "2e5e71f5a42a667ae3f651fcf08d2620" // evanrosson.org
   xmarkedgame_com_zone_id = "00f73e4217e15755e801a2830015dddd" // xmarkedgame.com
+  war_swarms_com_zone_id = "111988a39faa077f7920ed8f8057e657" // war-swarms.com
+  warswarm_com_zone_id = "cc9bb7d13f3634894f515d475933c922" // warswarm.com
+  warswarms_com_zone_id = "9453bb5f2643566155fd5e0f562d4f42" // warswarms.com
 
   cname_value = replace(digitalocean_app.main.default_ingress, "https://", "")
   proxied = "true"
