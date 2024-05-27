@@ -49,6 +49,8 @@ D("erosson.org", REG, DnsProvider(DNS),
     IGNORE("docker-cooking"),
     IGNORE("docker-vegas-wordle"),
     IGNORE("docker-freecbt"),
+    IGNORE("docker"),
+    IGNORE("docker-www"),
 
     ///////////////////////////////////////////////////////
     // stuff that isn't widely used, and not maintained:

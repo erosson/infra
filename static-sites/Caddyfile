@@ -7,6 +7,8 @@
 # In prod, when running the CI-built container:
 # * You'll connect to `https://{host}`. For example, `https://math2.swarmsim.com`. "https", with an "s".
 # The files `/var/www/{host}.localhost` will not exist.
+{$DOMAIN_PREFIX}docker-www.erosson.org{$DOMAIN_SUFFIX},
+{$DOMAIN_PREFIX}www.erosson.org{$DOMAIN_SUFFIX},
 {$DOMAIN_PREFIX}docker-math2.swarmsim.com{$DOMAIN_SUFFIX},
 {$DOMAIN_PREFIX}math2.swarmsim.com{$DOMAIN_SUFFIX},
 {$DOMAIN_PREFIX}docker-math.swarmsim.com{$DOMAIN_SUFFIX},
@@ -59,14 +61,17 @@
 {$DOMAIN_PREFIX}zealgame.com{$DOMAIN_SUFFIX} {
     redir {scheme}://www.zealgame.com{uri}
 }
+
 {$DOMAIN_PREFIX}docker.zealgame.com{$DOMAIN_SUFFIX} {
     redir {scheme}://docker-www.zealgame.com{uri}
 }
+
 {$DOMAIN_PREFIX}docker.swarmsim.com{$DOMAIN_SUFFIX},
 {$DOMAIN_PREFIX}*.swarmsimulator.com{$DOMAIN_SUFFIX},
 {$DOMAIN_PREFIX}swarmsimulator.com{$DOMAIN_SUFFIX} {
     redir {scheme}://www.swarmsim.com{uri}
 }
+
 {$DOMAIN_PREFIX}*.evanrosson.org{$DOMAIN_SUFFIX},
 {$DOMAIN_PREFIX}evanrosson.org{$DOMAIN_SUFFIX},
 {$DOMAIN_PREFIX}*.evanrosson.com{$DOMAIN_SUFFIX},
@@ -75,6 +80,7 @@
 {$DOMAIN_PREFIX}erosson.us{$DOMAIN_SUFFIX},
 {$DOMAIN_PREFIX}*.erosson.com{$DOMAIN_SUFFIX},
 {$DOMAIN_PREFIX}erosson.com{$DOMAIN_SUFFIX},
+{$DOMAIN_PREFIX}docker.erosson.org{$DOMAIN_SUFFIX},
 {$DOMAIN_PREFIX}erosson.org{$DOMAIN_SUFFIX} {  # bare domain, no www
     redir https://www.erosson.org{uri}
 }
