@@ -28,5 +28,6 @@ D("swarmsim.com", REG, DnsProvider(DNS),
 
 	// terraform handles others
 	IGNORE("docker-math2"),
+	IGNORE("docker-math"),
 	IGNORE("math2")
 )

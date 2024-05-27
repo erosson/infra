@@ -2,6 +2,7 @@ FROM caddy:2.8
 ARG NO_LOCALHOST
 
 COPY --from=ghcr.io/erosson/math2.swarmsim.com:main /usr/share/caddy /sites/math2.swarmsim.com
+COPY --from=ghcr.io/erosson/math.swarmsim.com:master /usr/share/caddy /sites/math.swarmsim.com
 COPY --from=ghcr.io/erosson/cooking.erosson.org:main /usr/share/caddy /sites/cooking.erosson.org
 COPY --from=ghcr.io/erosson/vegas-wordle:main /usr/share/caddy /sites/vegas-wordle.erosson.org
 COPY --from=ghcr.io/erosson/freecbt.erosson.org:master /usr/share/caddy /sites/freecbt.erosson.org

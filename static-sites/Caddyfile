@@ -8,6 +8,7 @@
 # * You'll connect to `https://{host}`. For example, `https://math2.swarmsim.com`. "https", with an "s".
 # The files `/var/www/{host}.localhost` will not exist.
 {$DOMAIN_PREFIX}docker-math2.swarmsim.com{$DOMAIN_SUFFIX},
+{$DOMAIN_PREFIX}docker-math.swarmsim.com{$DOMAIN_SUFFIX},
 {$DOMAIN_PREFIX}docker-cooking.erosson.org{$DOMAIN_SUFFIX},
 {$DOMAIN_PREFIX}docker-vegas-wordle.erosson.org{$DOMAIN_SUFFIX},
 {$DOMAIN_PREFIX}docker-freecbt.erosson.org{$DOMAIN_SUFFIX},

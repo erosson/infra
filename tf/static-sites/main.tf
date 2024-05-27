@@ -7,6 +7,7 @@ locals {
   # many of them look like domains, but I promise they're repo names. like https://github.com/erosson/math2.swarmsim.com
   github_repositories = [
     "math2.swarmsim.com",
+    "math.swarmsim.com",
     "cooking.erosson.org",
     "vegas-wordle",
     "freecbt",
@@ -34,6 +35,7 @@ locals {
     {sub="www", domain="evanrosson.org", zone_id=local.evanrosson_org_zone_id},
     {sub="", domain="xmarkedgame.com", zone_id=local.xmarkedgame_com_zone_id},
     {sub="www", domain="xmarkedgame.com", zone_id=local.xmarkedgame_com_zone_id},
+    {sub="docker-math", domain="swarmsim.com", zone_id=local.swarmsim_com_zone_id},
   ]
 }
 
