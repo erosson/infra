@@ -1,0 +1,10 @@
+{
+    "scripts": {
+        "start": "docker compose up --build",
+        "test": "vitest"
+    },
+    "devDependencies": {
+        "testcontainers": "^10.9.0",
+        "vitest": "^1.6.0"
+    }
+}
