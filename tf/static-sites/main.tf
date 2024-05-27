@@ -22,6 +22,18 @@ locals {
     {sub="docker-vegas-wordle", domain="erosson.org", zone_id=local.erosson_org_zone_id},
     {sub="docker-www", domain="zealgame.com", zone_id=local.zealgame_com_zone_id},
     {sub="docker", domain="zealgame.com", zone_id=local.zealgame_com_zone_id},
+    {sub="", domain="swarmsimulator.com", zone_id=local.swarmsimulator_com_zone_id},
+    {sub="www", domain="swarmsimulator.com", zone_id=local.swarmsimulator_com_zone_id},
+    {sub="", domain="erosson.com", zone_id=local.erosson_com_zone_id},
+    {sub="www", domain="erosson.com", zone_id=local.erosson_com_zone_id},
+    {sub="", domain="erosson.us", zone_id=local.erosson_us_zone_id},
+    {sub="www", domain="erosson.us", zone_id=local.erosson_us_zone_id},
+    {sub="", domain="evanrosson.com", zone_id=local.evanrosson_com_zone_id},
+    {sub="www", domain="evanrosson.com", zone_id=local.evanrosson_com_zone_id},
+    {sub="", domain="evanrosson.org", zone_id=local.evanrosson_org_zone_id},
+    {sub="www", domain="evanrosson.org", zone_id=local.evanrosson_org_zone_id},
+    {sub="", domain="xmarkedgame.com", zone_id=local.xmarkedgame_com_zone_id},
+    {sub="www", domain="xmarkedgame.com", zone_id=local.xmarkedgame_com_zone_id},
   ]
 }
 
@@ -32,6 +44,14 @@ locals {
   erosson_org_zone_id = "7c06b35c2392935ebb0653eaf94a3e70" // erosson.org
   swarmsim_com_zone_id = "2526e11f0b20a0e69b0fcfb1e5a21d21" // swarmsim.com
   zealgame_com_zone_id = "ff0d132b2612531ac86aa3fb825d6415" // zealgame.com
+  // redirects
+  swarmsimulator_com_zone_id = "d13b76f838ab1e82ed4c822138edfba8" // swarmsimulator.com
+  erosson_com_zone_id = "9cd45b2dd8a01f74aa7e47e96ef0792c" // erosson.com
+  erosson_us_zone_id = "3e80b1a30a4db8af6132a536d144472e" // erosson.us
+  evanrosson_com_zone_id = "d647fab55890593346d839d4cd92679a" // evanrosson.com
+  evanrosson_org_zone_id = "2e5e71f5a42a667ae3f651fcf08d2620" // evanrosson.org
+  xmarkedgame_com_zone_id = "00f73e4217e15755e801a2830015dddd" // xmarkedgame.com
+
   cname_value = replace(digitalocean_app.main.default_ingress, "https://", "")
   proxied = "true"
   full_domains = [ for d in local.domains: merge(d, {full_domain="${d.sub == "" ? "" : "${d.sub}."}${d.domain}"})]
@@ -99,10 +119,10 @@ resource "digitalocean_app" "main" {
 
 resource "cloudflare_record" "main" {
   # https://stackoverflow.com/questions/58594506/how-to-for-each-through-a-listobjects-in-terraform-0-12 : "using for_each on a list of objects"
-  for_each = { for index, d in local.domains: "${d.sub}.${d.domain}" => d }
+  for_each = { for index, d in local.full_domains: d.full_domain => d }
   zone_id = each.value.zone_id
   type = "CNAME"
-  name = each.value.sub
+  name = each.value.sub == "" ? "@" : each.value.sub
   value = local.cname_value
   proxied = local.proxied
 }

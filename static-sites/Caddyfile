@@ -45,6 +45,25 @@
 {$DOMAIN_PREFIX}docker.zealgame.com{$DOMAIN_SUFFIX} {
     redir {scheme}://docker-www.zealgame.com{$DOMAIN_SUFFIX}{uri}
 }
+{$DOMAIN_PREFIX}*.swarmsimulator.com{$DOMAIN_SUFFIX},
+{$DOMAIN_PREFIX}swarmsimulator.com{$DOMAIN_SUFFIX} {
+    redir {scheme}://www.swarmsim.com{$DOMAIN_SUFFIX}{uri}
+}
+{$DOMAIN_PREFIX}*.evanrosson.org{$DOMAIN_SUFFIX},
+{$DOMAIN_PREFIX}evanrosson.org{$DOMAIN_SUFFIX},
+{$DOMAIN_PREFIX}*.evanrosson.com{$DOMAIN_SUFFIX},
+{$DOMAIN_PREFIX}evanrosson.com{$DOMAIN_SUFFIX},
+{$DOMAIN_PREFIX}*.erosson.us{$DOMAIN_SUFFIX},
+{$DOMAIN_PREFIX}erosson.us{$DOMAIN_SUFFIX},
+{$DOMAIN_PREFIX}*.erosson.com{$DOMAIN_SUFFIX},
+{$DOMAIN_PREFIX}erosson.com{$DOMAIN_SUFFIX} {
+    redir https://www.erosson.org{$DOMAIN_SUFFIX}{uri}
+}
+
+{$DOMAIN_PREFIX}*.xmarkedgame.com{$DOMAIN_SUFFIX},
+{$DOMAIN_PREFIX}xmarkedgame.com{$DOMAIN_SUFFIX} {
+    redir https://www.x-marked.com{$DOMAIN_SUFFIX}{uri}
+}
 
 :80, :443, :2015 {
     # route{} uses the order below, not caddy's default order. without this, `error` is higher priority and health checks all 404.

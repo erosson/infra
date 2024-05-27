@@ -4,5 +4,8 @@ for (var i in domains) {
     // ugh, no for-of - what ancient js interpreter is dnscontrol using
     var domain = domains[i]
 
-    D(domain, REG, DnsProvider(DNS))
+    D(domain, REG, DnsProvider(DNS),
+        IGNORE("@", "CNAME"),
+        IGNORE("www", "CNAME")
+    )
 }

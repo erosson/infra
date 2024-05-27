@@ -1,9 +1,9 @@
 // currently a simple alias to erosson.org
 D("erosson.com", REG, DnsProvider(DNS),
     DefaultTTL(1),
-    ALIAS("@", "erosson.com.s3-website-us-east-1.amazonaws.com.", CF_PROXY_ON),
+    IGNORE("@", "CNAME"),
+    IGNORE("www", "CNAME"),
     CNAME("mail", "ghs.google.com."),
-    CNAME("www", "www.erosson.com.s3-website-us-east-1.amazonaws.com.", CF_PROXY_ON),
     MX("@", 5, "alt1.aspmx.l.google.com."),
     MX("@", 1, "aspmx.l.google.com."),
     MX("@", 5, "alt2.aspmx.l.google.com."),
