@@ -17,15 +17,10 @@ locals {
     "erosson.org",
   ]
   # generate dns records and digitalocean-app domain entries
+  # TODO: digitalocean-apps have a limit of 40 domain names. unacceptable! find a new host?
   domains = [
     {sub="docker-ops", domain="erosson.org", zone_id=local.erosson_org_zone_id},
     {sub="ops", domain="erosson.org", zone_id=local.erosson_org_zone_id},
-    {sub="docker-math2", domain="swarmsim.com", zone_id=local.swarmsim_com_zone_id},
-    {sub="docker-cooking", domain="erosson.org", zone_id=local.erosson_org_zone_id},
-    {sub="docker-freecbt", domain="erosson.org", zone_id=local.erosson_org_zone_id},
-    {sub="docker-vegas-wordle", domain="erosson.org", zone_id=local.erosson_org_zone_id},
-    {sub="docker-www", domain="zealgame.com", zone_id=local.zealgame_com_zone_id},
-    {sub="docker", domain="zealgame.com", zone_id=local.zealgame_com_zone_id},
     {sub="", domain="swarmsimulator.com", zone_id=local.swarmsimulator_com_zone_id},
     {sub="www", domain="swarmsimulator.com", zone_id=local.swarmsimulator_com_zone_id},
     {sub="", domain="erosson.com", zone_id=local.erosson_com_zone_id},
@@ -50,11 +45,13 @@ locals {
     {sub="", domain="war-swarms.com", zone_id=local.war_swarms_com_zone_id},
     {sub="www", domain="war-swarms.com", zone_id=local.war_swarms_com_zone_id},
     {sub="news", domain="war-swarms.com", zone_id=local.war_swarms_com_zone_id},
-    {sub="docker-www", domain="erosson.org", zone_id=local.erosson_org_zone_id},
-    {sub="docker", domain="erosson.org", zone_id=local.erosson_org_zone_id},
     {sub="www", domain="erosson.org", zone_id=local.erosson_org_zone_id},
     {sub="www", domain="zealgame.com", zone_id=local.zealgame_com_zone_id},
     {sub="", domain="zealgame.com", zone_id=local.zealgame_com_zone_id},
+    {sub="math2", domain="swarmsim.com", zone_id=local.swarmsim_com_zone_id},
+    {sub="freecbt", domain="erosson.org", zone_id=local.erosson_org_zone_id},
+    {sub="cooking", domain="erosson.org", zone_id=local.erosson_org_zone_id},
+    {sub="vegas-wordle", domain="erosson.org", zone_id=local.erosson_org_zone_id},
   ]
 }
 
