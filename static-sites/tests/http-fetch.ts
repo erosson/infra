@@ -57,7 +57,7 @@ export function containerOrigin(container: StartedTestContainer): string {
 export async function containerHttpRequest(container: StartedTestContainer, url: string | URL, options?: Http.RequestOptions): Promise<FakeFetchResponse> {
     const u = new URL(url)
     const { host } = u
-    console.log('containerHttpRequest', { host })
+    // console.log('containerHttpRequest', { host })
 
     const origin = new URL(containerOrigin(container))
     u.host = origin.host
