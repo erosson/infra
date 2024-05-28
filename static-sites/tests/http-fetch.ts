@@ -1,4 +1,5 @@
 import * as Http from 'http'
+import { StartedTestContainer } from 'testcontainers'
 
 /**
  * I tried to make fetch happen, but I stopped and used this instead
@@ -7,9 +8,10 @@ import * as Http from 'http'
  */
 export interface FakeFetchResponse {
     raw: Http.IncomingMessage
-    status?: number,
-    statusText?: string,
-    ok: boolean,
+    status?: number
+    statusText?: string
+    ok: boolean
+    url: string
     text(): Promise<string>
 }
 async function httpRequestRaw(url: string | URL, options?: Http.RequestOptions): Promise<Http.IncomingMessage> {
@@ -32,18 +34,34 @@ async function httpBodyText(res: Http.IncomingMessage): Promise<string> {
 /**
  * Mimic the parts I need from `fetch`, and add fake `Host` headers
  */
-export async function httpRequest(url: string | URL, options?: Http.RequestOptions): Promise<FakeFetchResponse> {
-    const raw = await httpRequestRaw(url, options)
+export async function httpRequest(url0: string | URL, options?: Http.RequestOptions): Promise<FakeFetchResponse> {
+    const raw = await httpRequestRaw(url0, options)
     const status = raw.statusCode
     const statusText = raw.statusMessage
     const ok = raw.statusCode != null && raw.statusCode >= 200 && raw.statusCode < 300
+    const url = raw.url ?? url0.toString()
     function text() {
         return httpBodyText(raw)
     }
-    return { raw, status, statusText, ok, text }
+    return { raw, status, statusText, ok, url, text }
 }
 export async function httpRequestWithHost(url: string | URL, Host: string, options?: Http.RequestOptions): Promise<FakeFetchResponse> {
     options = options ?? {}
     options.headers = { ...(options.headers ?? {}), Host }
     return httpRequest(url, options)
+}
+
+export function containerOrigin(container: StartedTestContainer): string {
+    return `http://${container.getHost()}:${container.getFirstMappedPort()}`
+}
+export async function containerHttpRequest(container: StartedTestContainer, url: string | URL, options?: Http.RequestOptions): Promise<FakeFetchResponse> {
+    const u = new URL(url)
+    const { host } = u
+    console.log('containerHttpRequest', { host })
+
+    const origin = new URL(containerOrigin(container))
+    u.host = origin.host
+    u.protocol = origin.protocol
+    // console.log('containerHttpRequest', { host, u })
+    return httpRequestWithHost(u, host, options)
 }
