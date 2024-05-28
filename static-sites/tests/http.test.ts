@@ -50,6 +50,14 @@ test('render www.erosson.org', async () => {
     expect(body).toContain('Evan Rosson')
     expect(body).toContain("https://mastodon.social/@erosson")
 })
+test('render freecbt.erosson.org', async () => {
+    const res = await containerHttpRequest(container, 'http://freecbt.erosson.org')
+    const body = await res.text()
+    expect(body).not.toContain('no vhost')
+    expect(body).not.toContain('Evan Rosson')
+    expect(body).toContain("FreeCBT")
+    expect(body).toContain("Cognitive Behavioral Therapy")
+})
 test('render www.swarmsim.com', async () => {
     const res = await containerHttpRequest(container, 'http://www.swarmsim.com')
     const body = await res.text()
