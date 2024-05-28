@@ -1,5 +1,5 @@
 import * as Path from 'path'
-import { GenericContainer, StartedTestContainer } from 'testcontainers'
+import { GenericContainer, StartedTestContainer, TestContainers } from 'testcontainers'
 import { beforeAll, expect, test } from 'vitest'
 import { containerHttpRequest, containerOrigin, httpRequest, httpRequestWithHost } from './http-fetch'
 
@@ -89,3 +89,7 @@ for (const r of redirects) {
         expect(res.raw.headers.location).toBe(r.to)
     })
 }
+
+test('fail test', () => {
+    expect(1).toBe(0)
+})
