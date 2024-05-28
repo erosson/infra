@@ -13,6 +13,7 @@ locals {
     "freecbt",
     "zealgame.com",
     "../swarmsim/swarm",
+    # TODO: `/s3/buckets/www.erosson.org` still exists. once we're confident in this new docker hosting, delete it
     "erosson.org",
   ]
   # generate dns records and digitalocean-app domain entries
@@ -51,6 +52,7 @@ locals {
     {sub="news", domain="war-swarms.com", zone_id=local.war_swarms_com_zone_id},
     {sub="docker-www", domain="erosson.org", zone_id=local.erosson_org_zone_id},
     {sub="docker", domain="erosson.org", zone_id=local.erosson_org_zone_id},
+    {sub="www", domain="erosson.org", zone_id=local.erosson_org_zone_id},
   ]
 }
 

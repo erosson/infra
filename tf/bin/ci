@@ -5,8 +5,6 @@ cd "`dirname "$0"`/.."
 
 STACKS=(
 ./git-repos
-./www.erosson.org
-./test-tf.erosson.org
 ./math2.swarmsim.com
 ./cooking.erosson.org
 ./freecbt.erosson.org
@@ -16,8 +14,6 @@ STACKS=(
 )
 WORKSPACES=(
 ./git-repos
-./www.erosson.org
-./test-tf.erosson.org
 ./math2.swarmsim.com
 ./cooking.erosson.org
 ./freecbt.erosson.org
@@ -26,8 +22,8 @@ WORKSPACES=(
 ./static-sites
 # no workspaces just yet. with personal projects, it's all in production all the time, amirite?
 # but if there were workspaces, it might look a bit like: 
-# ./test-tf.erosson.org/staging
-# ./test-tf.erosson.org/prod
+# ./PROJECT/staging
+# ./PROJECT/prod
 )
 
 set -x

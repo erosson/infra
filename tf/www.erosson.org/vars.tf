@@ -1,2 +1,0 @@
-variable "GITLAB_TOKEN" {
-}
