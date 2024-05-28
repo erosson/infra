@@ -89,7 +89,3 @@ for (const r of redirects) {
         expect(res.raw.headers.location).toBe(r.to)
     })
 }
-
-test('fail test', () => {
-    expect(1).toBe(0)
-})
