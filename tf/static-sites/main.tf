@@ -53,6 +53,8 @@ locals {
     {sub="docker-www", domain="erosson.org", zone_id=local.erosson_org_zone_id},
     {sub="docker", domain="erosson.org", zone_id=local.erosson_org_zone_id},
     {sub="www", domain="erosson.org", zone_id=local.erosson_org_zone_id},
+    {sub="www", domain="zealgame.com", zone_id=local.zealgame_com_zone_id},
+    {sub="", domain="zealgame.com", zone_id=local.zealgame_com_zone_id},
   ]
 }
 
