@@ -3,9 +3,11 @@ set -eu
 cd "`dirname "$0"`"
 
 # image name below should match the one in droplet-setup.sh
+#
+# no need for `docker compose down` below! `up` will restart only changed images:
+# https://www.reddit.com/r/selfhosted/comments/17of3lt/what_is_the_best_way_to_update_a_docker_image/
 scp -i .ssh/id_rsa docker-compose.yml root@static-droplet.erosson.org:/root/docker-compose.yml
 cat <<EOF | ./ssh
 docker compose pull
-docker compose down
 docker compose up -d
 EOF
