@@ -53,11 +53,11 @@ data "cloudinit_config" "main" {
   gzip          = false
   base64_encode = false
 
-  #part {
-  #  filename     = "cloud-config.yml"
-  #  content_type = "text/cloud-config"
-  #  content = file("${path.module}/cloud-config.yml")
-  #}
+  part {
+    filename     = "cloud-config.yml"
+    content_type = "text/cloud-config"
+    content = file("${path.module}/cloud-config.yml")
+  }
   part {
     # creates files. https://www.reddit.com/r/Terraform/comments/18cxum7/creating_files_on_remote_instance/
     filename     = "write-files.yml"

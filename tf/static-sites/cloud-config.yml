@@ -1,0 +1,4 @@
+#cloud-config
+# disable these if we're iterating server changes quickly, it slows startup
+package_update: true
+package_upgrade: true
