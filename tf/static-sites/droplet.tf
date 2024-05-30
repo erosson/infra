@@ -113,6 +113,13 @@ resource "digitalocean_volume" "main" {
   initial_filesystem_type = "ext4"
   initial_filesystem_label = "static-sites"
 }
+resource "null_resource" "droplet_health_check" {
+  provisioner "local-exec" {
+    # https://stackoverflow.com/a/58759974
+    command = "timeout 10m bash -c 'until curl --max-time 3 --fail http://${digitalocean_droplet.main.ipv4_address}/healthz ; do sleep 3; done'"
+    interpreter = [ "/bin/bash", "-c" ]
+  }
+}
 
 ## create a known_hosts file, so ssh/deploy work without a "host key verification failed" error
 ## ugh, screw this. I tried.
@@ -147,6 +154,7 @@ resource "digitalocean_reserved_ip" "main" {
 resource "digitalocean_reserved_ip_assignment" "main" {
   ip_address = digitalocean_reserved_ip.main.ip_address
   droplet_id = digitalocean_droplet.main.id
+  depends_on = [ null_resource.droplet_health_check ]
 }
 
 # For "proxied" to work, we must have cloudflare encryption-mode set to "full" or "full-strict".
