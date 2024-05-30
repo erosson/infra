@@ -56,7 +56,7 @@ data "cloudinit_config" "main" {
   part {
     filename     = "cloud-config.yml"
     content_type = "text/cloud-config"
-    content = file("${path.module}/cloud-config.yml")
+    content = file("${path.module}/server/cloud-config.yml")
   }
   part {
     # creates files. https://www.reddit.com/r/Terraform/comments/18cxum7/creating_files_on_remote_instance/
@@ -68,7 +68,7 @@ data "cloudinit_config" "main" {
           path = "/root/docker-compose.yml"
           permissions = "0644"
           owner = "root"
-          content = file("${path.module}/docker-compose.yml")
+          content = file("${path.module}/server/docker-compose.yml")
         }
       ]
     })
@@ -77,7 +77,7 @@ data "cloudinit_config" "main" {
     # runs on startup. https://cloudinit.readthedocs.io/en/latest/explanation/format.html#mime-multi-part-archive
     filename     = "droplet-setup.sh"
     content_type = "text/x-shellscript"
-    content = file("${path.module}/droplet-setup.sh")
+    content = file("${path.module}/server/droplet-setup.sh")
   }
 }
 
