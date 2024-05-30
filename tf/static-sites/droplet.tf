@@ -65,10 +65,10 @@ data "cloudinit_config" "main" {
     content = yamlencode({
       write_files = [
         {
-          path = "/root/droplet-setup.sh"
+          path = "/root/docker-compose.yml"
           permissions = "0644"
           owner = "root"
-          content = file("${path.module}/droplet-setup.sh")
+          content = file("${path.module}/docker-compose.yml")
         }
       ]
     })

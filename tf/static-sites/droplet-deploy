@@ -2,6 +2,10 @@
 set -eu
 cd "`dirname "$0"`"
 
+if [ -v CI ]; then
+    echo "$STATIC_SITES_DEPLOY_PUBLIC_KEY" > .ssh/id_rsa.pub
+    echo "$STATIC_SITES_DEPLOY_PRIVATE_KEY" > .ssh/id_rsa
+fi
 # image name below should match the one in droplet-setup.sh
 #
 # no need for `docker compose down` below! `up` will restart only changed images:
