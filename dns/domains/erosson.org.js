@@ -48,6 +48,7 @@ D("erosson.org", REG, DnsProvider(DNS),
     IGNORE("docker"),
     IGNORE("docker-www"),
     IGNORE("www"),
+    IGNORE("static-droplet"),
 
     ///////////////////////////////////////////////////////
     // stuff that isn't widely used, and not maintained:
