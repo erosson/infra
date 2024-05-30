@@ -49,6 +49,37 @@ resource "digitalocean_ssh_key" "main" {
   name = "tf: ssh/main"
   public_key = tls_private_key.main.public_key_openssh
 }
+data "cloudinit_config" "main" {
+  gzip          = false
+  base64_encode = false
+
+  #part {
+  #  filename     = "cloud-config.yml"
+  #  content_type = "text/cloud-config"
+  #  content = file("${path.module}/cloud-config.yml")
+  #}
+  part {
+    # creates files. https://www.reddit.com/r/Terraform/comments/18cxum7/creating_files_on_remote_instance/
+    filename     = "write-files.yml"
+    content_type = "text/cloud-config"
+    content = yamlencode({
+      write_files = [
+        {
+          path = "/root/droplet-setup.sh"
+          permissions = "0644"
+          owner = "root"
+          content = file("${path.module}/droplet-setup.sh")
+        }
+      ]
+    })
+  }
+  part {
+    # runs on startup. https://cloudinit.readthedocs.io/en/latest/explanation/format.html#mime-multi-part-archive
+    filename     = "droplet-setup.sh"
+    content_type = "text/x-shellscript"
+    content = file("${path.module}/droplet-setup.sh")
+  }
+}
 resource "digitalocean_droplet" "main" {
   image  = "docker-20-04"
   name   = "static-sites"
@@ -58,7 +89,7 @@ resource "digitalocean_droplet" "main" {
   size   = "s-1vcpu-1gb"
   ipv6 = true
   ssh_keys = [digitalocean_ssh_key.main.fingerprint]
-  user_data = file("./droplet-setup.sh")
+  user_data = data.cloudinit_config.main.rendered
   volume_ids = [ digitalocean_volume.main.id ]
   depends_on = [ digitalocean_volume.main ]
 }

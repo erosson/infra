@@ -1,0 +1,23 @@
+# https://hub.docker.com/_/caddy
+version: "3.8"
+services:
+  static-sites:
+    image: ghcr.io/erosson/public-infra-static-sites-small:main
+    # after reboot, or restarting the docker daemon, auto-launch this container
+    restart: unless-stopped
+    # volume mounts, ports, and cap-add necessary for caddy ssl and its persistent data
+    cap_add:
+      - NET_ADMIN
+    ports:
+      - "80:80"
+      - "443:443"
+      - "443:443/udp"
+    volumes:
+      - /mnt/static-sites/caddy-data:/data
+      - /mnt/static-sites/caddy-config:/config
+
+volumes:
+  caddy_data:
+    # "Defining the data volume as external makes sure docker-compose down does not delete the volume."
+    external: true
+  caddy_config:
