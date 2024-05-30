@@ -85,8 +85,8 @@ data "cloudinit_config" "main" {
 # no healthcheck to check readiness or anything. Until then, the site will be down!
 resource "digitalocean_droplet" "main" {
   image  = "docker-20-04"
-  # name   = "static-sites-${random_id.id.hex}"
   name   = "static-sites"
+  # name   = "static-sites"
   region = "nyc1"
   # minimum size for docker image, but we don't actually need it
   # size   = "s-1vcpu-512mb-10gb"
@@ -94,17 +94,18 @@ resource "digitalocean_droplet" "main" {
   ipv6 = true
   ssh_keys = [digitalocean_ssh_key.main.fingerprint]
   user_data = data.cloudinit_config.main.rendered
-  volume_ids = [ digitalocean_volume.main.id ]
-  # NOPE, the persistent volume messes this up - it can only be mounted to one machine at a time.
-  # For zero-downtime, we'll need to move SSL somewhere else to avoid any persistent data.
-  # (And also configure a proper healthcheck somewhere, so we know when creation's really done.)
-  # lifecycle {
-  #   create_before_destroy = true
-  # }
+  lifecycle {
+    # this dramatically reduces downtime when recreating the droplet, but requires no volume_ids.
+    create_before_destroy = true
+  }
+  provisioner "local-exec" {
+    # https://stackoverflow.com/a/58759974
+    command = "timeout 20m bash -c 'until curl --insecure --max-time 3 --fail --no-progress-meter http://${digitalocean_droplet.main.ipv4_address}/healthz ; do sleep 3; done'"
+    interpreter = [ "/bin/bash", "-c" ]
+  }
 }
-# resource "random_id" "id" {
-# 	byte_length = 4
-# }
+
+# TODO delete - not needed for self-signed certs
 resource "digitalocean_volume" "main" {
   region = "nyc1"
   name = "static-sites"
@@ -112,13 +113,6 @@ resource "digitalocean_volume" "main" {
   description = "Caddy's persistent data"
   initial_filesystem_type = "ext4"
   initial_filesystem_label = "static-sites"
-}
-resource "null_resource" "droplet_health_check" {
-  provisioner "local-exec" {
-    # https://stackoverflow.com/a/58759974
-    command = "timeout 10m bash -c 'until curl --insecure --max-time 3 --fail http://${digitalocean_droplet.main.ipv4_address}/healthz ; do sleep 3; done'"
-    interpreter = [ "/bin/bash", "-c" ]
-  }
 }
 
 ## create a known_hosts file, so ssh/deploy work without a "host key verification failed" error
@@ -152,9 +146,12 @@ resource "digitalocean_reserved_ip" "main" {
   region = "nyc1"
 }
 resource "digitalocean_reserved_ip_assignment" "main" {
+  lifecycle {
+    # surprisingly, this seems to work! dramatically reduces downtime when recreating droplet.
+    create_before_destroy = true
+  }
   ip_address = digitalocean_reserved_ip.main.ip_address
   droplet_id = digitalocean_droplet.main.id
-  depends_on = [ null_resource.droplet_health_check ]
 }
 
 # For "proxied" to work, we must have cloudflare encryption-mode set to "full" or "full-strict".

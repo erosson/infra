@@ -13,8 +13,9 @@ services:
       - "443:443"
       - "443:443/udp"
     volumes:
-      - /mnt/static-sites/caddy-data:/data
-      - /mnt/static-sites/caddy-config:/config
+      # caddy-data is persistent only for the life of this droplet. This is safe for self-signed SSL (caddy: `tls internal`), but not "real", user-facing SSL!
+      - /root/caddy-data:/data
+      - /root/caddy-config:/config
 
 volumes:
   caddy_data:
