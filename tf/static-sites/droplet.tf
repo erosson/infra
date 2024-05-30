@@ -80,8 +80,12 @@ data "cloudinit_config" "main" {
     content = file("${path.module}/droplet-setup.sh")
   }
 }
+
+# The site is ready ~5 minutes after terraform finishes creating the machine.
+# no healthcheck to check readiness or anything. Until then, the site will be down!
 resource "digitalocean_droplet" "main" {
   image  = "docker-20-04"
+  # name   = "static-sites-${random_id.id.hex}"
   name   = "static-sites"
   region = "nyc1"
   # minimum size for docker image, but we don't actually need it
@@ -91,8 +95,16 @@ resource "digitalocean_droplet" "main" {
   ssh_keys = [digitalocean_ssh_key.main.fingerprint]
   user_data = data.cloudinit_config.main.rendered
   volume_ids = [ digitalocean_volume.main.id ]
-  depends_on = [ digitalocean_volume.main ]
+  # NOPE, the persistent volume messes this up - it can only be mounted to one machine at a time.
+  # For zero-downtime, we'll need to move SSL somewhere else to avoid any persistent data.
+  # (And also configure a proper healthcheck somewhere, so we know when creation's really done.)
+  # lifecycle {
+  #   create_before_destroy = true
+  # }
 }
+# resource "random_id" "id" {
+# 	byte_length = 4
+# }
 resource "digitalocean_volume" "main" {
   region = "nyc1"
   name = "static-sites"
