@@ -6,9 +6,9 @@ import { containerHttpRequest, containerOrigin, httpRequest, httpRequestWithHost
 let container: StartedTestContainer
 
 beforeAll(async () => {
-    const dockerCtx = Path.join(__dirname, "..")
+    const dockerCtx = Path.join(__dirname, "../..")
     // const image = await GenericContainer.fromDockerfile(dockerCtx).withBuildArgs({ NO_LOCALHOST: '1' }).build()
-    const image = await GenericContainer.fromDockerfile(dockerCtx).build()
+    const image = await GenericContainer.fromDockerfile(dockerCtx, "image/Dockerfile").build()
     container = await image.withEnvironment({ 'DOMAIN_PREFIX': 'http://' }).withExposedPorts(80).start()
 }, 90000)
 function origin() {

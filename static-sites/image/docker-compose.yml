@@ -1,7 +1,8 @@
 services:
   main:
     build:
-      context: .
+      context: ..
+      dockerfile: image/Dockerfile
       args:
         - NO_LOCALHOST=1
     environment:
