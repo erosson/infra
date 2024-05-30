@@ -4,6 +4,7 @@ cd "`dirname "$0"`"
 
 # create ssh auth files, if running in CI. https://stackoverflow.com/a/16946761
 if [ -v CI ]; then
+    mkdir -p .ssh
     echo "$STATIC_SITES_DEPLOY_PUBLIC_KEY" > .ssh/id_rsa.pub
     echo "$STATIC_SITES_DEPLOY_PRIVATE_KEY" > .ssh/id_rsa
 fi
