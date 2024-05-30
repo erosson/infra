@@ -1,14 +1,33 @@
-{$DOMAIN_PREFIX}docker-www.erosson.org{$DOMAIN_SUFFIX},
-{$DOMAIN_PREFIX}www.erosson.org{$DOMAIN_SUFFIX} {
+(tls) {
+    # User-facing SSL is handled by cloudflare's proxies.
+    # Self-signed certs between this server and cloudflare are easier to manage, ex. no persistent data.
+    tls internal
+}
+(healthz) {
+    # TODO cors
+    respond /healthz 200 {
+        body "大丈夫です。"
+    }
+    respond /healthz.json 200 {
+        body "{\"status\":\"大丈夫です。\"}"
+    }
+}
+(static_file_server) {
     root * /var/www/{host}
     file_server
+    import tls
+    import healthz
+}
+
+{$DOMAIN_PREFIX}docker-www.erosson.org{$DOMAIN_SUFFIX},
+{$DOMAIN_PREFIX}www.erosson.org{$DOMAIN_SUFFIX} {
+    import static_file_server
 }
 
 # ops/debug pages are just like most other pages, but with basicauth
 {$DOMAIN_PREFIX}docker-ops.erosson.org{$DOMAIN_SUFFIX},
 {$DOMAIN_PREFIX}ops.erosson.org{$DOMAIN_SUFFIX} {
-    root * /var/www/{host}
-    file_server
+    import static_file_server
 
     basicauth /debug/* {
         # passwords must be hashed before adding them to this file. https://caddyserver.com/docs/caddyfile/directives/basicauth
@@ -18,7 +37,9 @@
     }
 }
 
+
 {$DOMAIN_PREFIX}erosson.org{$DOMAIN_SUFFIX} {  # bare domain, no www
+    import tls
     redir https://www.erosson.org{uri}
 }
 
@@ -26,9 +47,7 @@
     # route{} uses the order below, not caddy's default order. without this, `error` is higher priority and health checks all 404.
     route {
         # tolerate health checks without any specific vhost. digitalocean (and other providers) need this for deployment to succeed
-        respond /healthz 200 {
-            body "大丈夫です。"
-        }
+        import healthz
         # any other path without a valid vhost fails
         error * "no vhost" 404
     }
