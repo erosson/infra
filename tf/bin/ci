@@ -21,7 +21,8 @@ for STACK in ${STACKS[@]}; do
     $STACK/tofu init
 done
 for WORKSPACE in ${WORKSPACES[@]}; do
-    TF_VAR_CI=true $WORKSPACE/tofu plan -detailed-exitcode
+    # use `var.CI` to skip spurious diffs during CI plans, like generating local files
+    TF_VAR_CI=${CI:-false} $WORKSPACE/tofu plan -detailed-exitcode
 done
 
 echo success

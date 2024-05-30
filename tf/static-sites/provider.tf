@@ -32,6 +32,10 @@ terraform {
   }
 }
 
+variable "CI" {
+  type = bool
+  default = false
+}
 # https://github.com/erosson/infra/blob/main/tf/static-sites/provider.tf
 variable "GITHUB_TOKEN_INFRA_BUILD_DOCKER_IMAGE" {
   # Other static-site repositories have this secret added to their actions.

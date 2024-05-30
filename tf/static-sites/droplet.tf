@@ -25,10 +25,12 @@ resource "tls_private_key" "main" {
   rsa_bits  = 8192
 }
 resource "local_sensitive_file" "sshkey" {
+  count = var.CI ? 0 : 1
   filename = ".ssh/id_rsa"
   content = tls_private_key.main.private_key_openssh
 }
 resource "local_sensitive_file" "sshkey_pub" {
+  count = var.CI ? 0 : 1
   filename = ".ssh/id_rsa.pub"
   content = tls_private_key.main.public_key_openssh
 }
