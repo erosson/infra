@@ -6,13 +6,14 @@ if [ -v CI ]; then
     mkdir -p .ssh
     echo "$STATIC_SITES_DEPLOY_PUBLIC_KEY" > .ssh/id_rsa.pub
     echo "$STATIC_SITES_DEPLOY_PRIVATE_KEY" > .ssh/id_rsa
-    echo "$STATIC_SITES_DEPLOY_HOST_KEY" > .ssh/known_hosts
 fi
 # image name below should match the one in droplet-setup.sh
 #
 # no need for `docker compose down` below! `up` will restart only changed images:
 # https://www.reddit.com/r/selfhosted/comments/17of3lt/what_is_the_best_way_to_update_a_docker_image/
-scp -i .ssh/id_rsa -o UserKnownHostsFile=.ssh/known_hosts docker-compose.yml root@static-droplet.erosson.org:/root/docker-compose.yml
+# scp -i .ssh/id_rsa -o UserKnownHostsFile=.ssh/known_hosts docker-compose.yml root@static-droplet.erosson.org:/root/docker-compose.yml
+# TODO: this is not secure, but I gave up fiddling with known_hosts via terraform
+scp -i .ssh/id_rsa  -o StrictHostKeyChecking=no docker-compose.yml root@static-droplet.erosson.org:/root/docker-compose.yml
 cat <<EOF | ./ssh
 docker compose pull
 docker compose up -d

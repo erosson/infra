@@ -102,24 +102,32 @@ resource "digitalocean_volume" "main" {
   initial_filesystem_label = "static-sites"
 }
 
-# create a known_hosts file, so ssh/deploy work without a "host key verification failed" error
-resource "null_resource" "droplet_host_key" {
-  depends_on = [ digitalocean_droplet.main ]
-  provisioner "local-exec" {
-    # https://hjr265.me/blog/generate-ssh-known-hosts-in-terraform/
-    command = "mkdir -p .ssh && ssh-keyscan static-droplet.erosson.org > .ssh/known_hosts"
-    interpreter = [ "/bin/bash", "-c" ]
-  }
-}
-data "local_file" "droplet_host_key" {
-  filename = "${path.module}/.ssh/known_hosts"
-  depends_on = [null_resource.droplet_host_key]
-}
-resource "github_actions_secret" "STATIC_SITES_DEPLOY_HOST_KEY" {
-  repository = "infra"
-  secret_name = "STATIC_SITES_DEPLOY_HOST_KEY"
-  plaintext_value = data.local_file.droplet_host_key.content
-}
+## create a known_hosts file, so ssh/deploy work without a "host key verification failed" error
+## ugh, screw this. I tried.
+#resource "null_resource" "droplet_host_key" {
+#  # triggers = {
+#    # always_run = timestamp()
+#  # }
+#  depends_on = [ digitalocean_droplet.main ]
+#  provisioner "local-exec" {
+#    # https://hjr265.me/blog/generate-ssh-known-hosts-in-terraform/
+#    command = "mkdir -p .ssh && ssh-keyscan static-droplet.erosson.org > .ssh/known_hosts_pristine && cp .ssh/known_hosts_pristine .ssh/known_hosts"
+#    interpreter = [ "/bin/bash", "-c" ]
+#  }
+#}
+#data "local_file" "droplet_host_key" {
+#  # count = var.CI ? 0 : 1
+#  count = 1
+#  filename = "${path.module}/.ssh/known_hosts_pristine"
+#  depends_on = [null_resource.droplet_host_key]
+#}
+#resource "github_actions_secret" "STATIC_SITES_DEPLOY_HOST_KEY" {
+#  # count = var.CI ? 0 : 1
+#  count = 1
+#  repository = "infra"
+#  secret_name = "STATIC_SITES_DEPLOY_HOST_KEY"
+#  plaintext_value = data.local_file.droplet_host_key[0].content
+#}
 
 resource "digitalocean_reserved_ip" "main" {
   region = "nyc1"
