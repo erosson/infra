@@ -17,7 +17,7 @@ locals {
     "erosson.org",
   ]
   # generate dns records and digitalocean-app domain entries
-  # TODO: digitalocean-apps have a limit of 40 domain names. unacceptable! find a new host?
+  # TODO: digitalocean-apps have a limit of 40 domain names. unacceptable! find a new host? same host, same image, 2+ instances?
   domains = [
     {sub="docker-ops", domain="erosson.org", zone_id=local.erosson_org_zone_id},
     {sub="ops", domain="erosson.org", zone_id=local.erosson_org_zone_id},

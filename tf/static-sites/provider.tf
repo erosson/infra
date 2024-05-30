@@ -48,9 +48,6 @@ variable "GITHUB_TOKEN_INFRA_BUILD_DOCKER_IMAGE" {
   # Created at: https://github.com/settings/personal-access-tokens/3347136
   # https://docs.github.com/en/rest/repos/repos?apiVersion=2022-11-28#create-a-repository-dispatch-event
 }
-provider "aws" {
-  region = "us-east-1"
-}
 provider "digitalocean" {
   # requires env DIGITALOCEAN_TOKEN. https://registry.terraform.io/providers/digitalocean/digitalocean/latest/docs
 }
