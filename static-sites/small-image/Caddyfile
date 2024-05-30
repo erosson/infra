@@ -1,0 +1,69 @@
+{$DOMAIN_PREFIX}docker-www.erosson.org{$DOMAIN_SUFFIX},
+{$DOMAIN_PREFIX}www.erosson.org{$DOMAIN_SUFFIX} {
+    root * /var/www/{host}
+    file_server
+}
+
+# ops/debug pages are just like most other pages, but with basicauth
+{$DOMAIN_PREFIX}docker-ops.erosson.org{$DOMAIN_SUFFIX},
+{$DOMAIN_PREFIX}ops.erosson.org{$DOMAIN_SUFFIX} {
+    root * /var/www/{host}
+    file_server
+
+    basicauth /debug/* {
+        # passwords must be hashed before adding them to this file. https://caddyserver.com/docs/caddyfile/directives/basicauth
+        # `docker run caddy caddy hash-password -p PASSWORD`
+        # shame on me for putting a password hash in public git, but production's different, and this doesn't need to be very secure
+        {$OPS_BASICAUTH:evan $2a$14$b3ihEIX.8Eq2IvBJ8HyLKew9/2X1SI/1X67HbAFzZF8iZwTTq4fwW}
+    }
+}
+
+:80, :443, :2015 {
+    # route{} uses the order below, not caddy's default order. without this, `error` is higher priority and health checks all 404.
+    route {
+        # tolerate health checks without any specific vhost. digitalocean (and other providers) need this for deployment to succeed
+        respond /healthz 200 {
+            body "大丈夫です。"
+        }
+        # any other path without a valid vhost fails
+        error * "no vhost" 404
+    }
+    # TODO: this affects other domains too, oops
+    handle_errors {
+        # root * /sites/error
+        # rewrite * /404-vhost.html
+        # file_server
+
+        # rewrite * /{err.status_code}
+        # reverse_proxy https://http.cat {
+        #     header_up Host {upstream_hostport}
+        #     replace_status {err.status_code}
+        # }
+        header Content-Type text/html
+        respond <<HTML
+            <!DOCTYPE html>
+            <html>
+            <style>
+            @media (prefers-color-scheme: dark) {
+                html, body {
+                    background-color: black;
+                    color: white;
+                }
+                a {
+                    color: pink;
+                }
+                a:visited {
+                    color: cyan;
+                }
+            }
+            </style>
+            <body>
+            <h1>{err.status_code} {err.status_text}</h1>
+            <p>{err.message}</p>
+            <img src="https://http.cat/{err.status_code}.jpg">
+            <p><i><small><a href="https://http.cat">https://http.cat</a></small></i></p>
+            </body>
+            </html>
+        HTML
+    }
+}
