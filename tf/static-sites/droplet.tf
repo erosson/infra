@@ -116,7 +116,7 @@ resource "digitalocean_volume" "main" {
 resource "null_resource" "droplet_health_check" {
   provisioner "local-exec" {
     # https://stackoverflow.com/a/58759974
-    command = "timeout 10m bash -c 'until curl --max-time 3 --fail http://${digitalocean_droplet.main.ipv4_address}/healthz ; do sleep 3; done'"
+    command = "timeout 10m bash -c 'until curl --insecure --max-time 3 --fail http://${digitalocean_droplet.main.ipv4_address}/healthz ; do sleep 3; done'"
     interpreter = [ "/bin/bash", "-c" ]
   }
 }
@@ -176,4 +176,11 @@ resource "cloudflare_record" "droplet" {
 }
 output "ip_address" {
   value = digitalocean_reserved_ip.main.ip_address
+}
+
+# https://cloud.digitalocean.com/monitors/uptime/checks
+resource "digitalocean_uptime_check" "www-erosson-org" {
+  name    = "www-erosson-org"
+  target  = "https://www.erosson.org/healthz"
+  regions = ["us_east", "us_west", "eu_west", "se_asia"]
 }
