@@ -1,5 +1,5 @@
 FROM caddy:2.8
-ARG NO_LOCALHOST
+ARG DOT_LOCALHOST
 
 COPY --from=ghcr.io/erosson/math2.swarmsim.com:main      /usr/share/caddy /sites/math2.swarmsim.com
 COPY --from=ghcr.io/erosson/math.swarmsim.com:master     /usr/share/caddy /sites/math.swarmsim.com
@@ -16,7 +16,7 @@ RUN for host in $(ls /sites); do \
     mkdir -p /var/www ;\
     ln -s /sites/$host /var/www/$host ;\
     ln -s /sites/$host /var/www/docker-$host ;\
-    if [ "${NO_LOCALHOST}" != "" ]; then \
+    if [ "${DOT_LOCALHOST}" != "" ]; then \
     ln -s /sites/$host /var/www/$host.localhost ;\
     ln -s /sites/$host /var/www/docker-$host.localhost ;\
     fi ;\

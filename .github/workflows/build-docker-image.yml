@@ -27,9 +27,9 @@ jobs:
         uses: actions/checkout@v4
       # run tests before building docker
       - uses: actions/setup-node@v4.0.2
-      - name: Run docker-image tests (testconatiners)
+      - name: Run docker-image tests (testcontainers)
         run: |
-          cd static-sites
+          cd static-sites/small
           yarn
           yarn test
 
