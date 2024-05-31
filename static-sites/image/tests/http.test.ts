@@ -64,6 +64,13 @@ test('render www.swarmsim.com', async () => {
     expect(body).not.toContain('no vhost')
     expect(body).toContain('Swarm Simulator')
 })
+test('render mapwatch.erosson.org', async () => {
+    const res = await containerHttpRequest(container, 'http://mapwatch.erosson.org')
+    const body = await res.text()
+    expect(res.status).toBe(200)
+    expect(body).not.toContain('no vhost')
+    // entirely js-rendered, can't test for content
+})
 
 export interface RedirectData {
     to: string

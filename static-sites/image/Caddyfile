@@ -28,6 +28,7 @@
 # In prod, when running the CI-built container:
 # * You'll connect to `https://{host}`. For example, `https://math2.swarmsim.com`. "https", with an "s".
 # The files `/var/www/{host}.localhost` will not exist.
+{$DOMAIN_PREFIX}mapwatch.erosson.org{$DOMAIN_SUFFIX},
 {$DOMAIN_PREFIX}www.swarmsim.com{$DOMAIN_SUFFIX},
 {$DOMAIN_PREFIX}docker-www.erosson.org{$DOMAIN_SUFFIX},
 {$DOMAIN_PREFIX}www.erosson.org{$DOMAIN_SUFFIX},

@@ -15,6 +15,7 @@ locals {
     "../swarmsim/swarm",
     # TODO: `/s3/buckets/www.erosson.org` still exists. once we're confident in this new docker hosting, delete it
     "erosson.org",
+    "../mapwatch/mapwatch",
   ]
   # generate dns records.
   droplet_domains = [
@@ -52,6 +53,7 @@ locals {
     {sub="freecbt", domain="erosson.org", zone_id=local.erosson_org_zone_id},
     {sub="cooking", domain="erosson.org", zone_id=local.erosson_org_zone_id},
     {sub="vegas-wordle", domain="erosson.org", zone_id=local.erosson_org_zone_id},
+    # {sub="mapwatch", domain="erosson.org", zone_id=local.erosson_org_zone_id},
   ]
 }
 

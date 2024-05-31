@@ -10,6 +10,7 @@ COPY --from=ghcr.io/erosson/zealgame.com:main            /usr/share/caddy /sites
 COPY --from=ghcr.io/swarmsim/www.swarmsim.com:master     /usr/share/caddy /sites/preprod.swarmsim.com
 COPY --from=ghcr.io/swarmsim/www.swarmsim.com:production /usr/share/caddy /sites/www.swarmsim.com
 COPY --from=ghcr.io/erosson/www.erosson.org:main         /usr/share/caddy /sites/www.erosson.org
+COPY --from=ghcr.io/mapwatch/mapwatch.erosson.org:master /usr/share/caddy /sites/mapwatch.erosson.org
 COPY src/ops.erosson.org /sites/ops.erosson.org
 
 RUN for host in $(ls /sites); do \
