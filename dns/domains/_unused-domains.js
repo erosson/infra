@@ -6,6 +6,7 @@ for (var i in domains) {
 
     D(domain, REG, DnsProvider(DNS),
         IGNORE("@", "CNAME"),
-        IGNORE("www", "CNAME")
+        IGNORE("@", "A"),
+        IGNORE("www")
     )
 }

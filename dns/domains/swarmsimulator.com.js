@@ -3,7 +3,7 @@ D("swarmsimulator.com", REG, DnsProvider(DNS),
 	// terraform-managed
 	IGNORE("@", "A"),
 	IGNORE("@", "CNAME"),
-	IGNORE("www", "CNAME"),
+	IGNORE("www"),
 	// not terraform-managed
 	MX("@", 10, "alt4.aspmx.l.google.com."),
 	MX("@", 5, "alt2.aspmx.l.google.com."),
