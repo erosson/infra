@@ -67,9 +67,13 @@ jobs:
           subject-digest: ${{ steps.push.outputs.digest }}
           push-to-registry: true
       
-      - run: |
-          .devcontainer/setup/doctl.sh
-          .devcontainer/setup/infisical.sh
-      - run: ./tf/static-sites/deploy
-        env: 
-          INFISICAL_TOKEN: ${{ secrets.INFISICAL_TOKEN }}
+      #- run: |
+      #    .devcontainer/setup/doctl.sh
+      #    .devcontainer/setup/infisical.sh
+      #- run: ./tf/static-sites/deploy
+      #  env: 
+      #    INFISICAL_TOKEN: ${{ secrets.INFISICAL_TOKEN }}
+      - run: ./tf/static-sites/droplet-deploy
+        env:
+          STATIC_SITES_DEPLOY_PUBLIC_KEY: ${{ secrets.STATIC_SITES_DEPLOY_PUBLIC_KEY }}
+          STATIC_SITES_DEPLOY_PRIVATE_KEY: ${{ secrets.STATIC_SITES_DEPLOY_PRIVATE_KEY }}

@@ -1,8 +1,0 @@
-#!/bin/bash
-set -eu
-
-infisical run -- bash -c 'doctl auth init -t "$DIGITALOCEAN_TOKEN"'
-doctl auth list
-APP_ID=`doctl apps list | grep erosson-infra-static-sites | cut -d' ' -f1`
-echo digitalocean app_id: $APP_ID
-doctl apps create-deployment --wait $APP_ID
