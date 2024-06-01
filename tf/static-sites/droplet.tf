@@ -53,7 +53,7 @@ locals {
     {sub="freecbt", domain="erosson.org", zone_id=local.erosson_org_zone_id},
     {sub="cooking", domain="erosson.org", zone_id=local.erosson_org_zone_id},
     {sub="vegas-wordle", domain="erosson.org", zone_id=local.erosson_org_zone_id},
-    # {sub="mapwatch", domain="erosson.org", zone_id=local.erosson_org_zone_id},
+    {sub="mapwatch", domain="erosson.org", zone_id=local.erosson_org_zone_id},
   ]
 }
 

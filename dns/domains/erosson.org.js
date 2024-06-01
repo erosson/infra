@@ -5,13 +5,8 @@ D("erosson.org", REG, DnsProvider(DNS),
     ///////////////////////////////////////////////////////
     // erosson.org has a lot of subdomains.
     // my most actively maintained and/or visited websites:
+    // ...are all terraformed now :)
     ///////////////////////////////////////////////////////
-
-    CNAME("piano", "piano.erosson.org.s3-website-us-east-1.amazonaws.com.", CF_PROXY_ON),
-
-    // https://mapwatch.erosson.org
-    // https://github.com/mapwatch/mapwatch - path of exile map tracking
-    CNAME("mapwatch", "mapwatch.erosson.org.s3-website-us-east-1.amazonaws.com.", CF_PROXY_ON),
 
     ///////////////////////////////////////////////////////
     // stuff that isn't maintained, but still has some users:
@@ -19,6 +14,8 @@ D("erosson.org", REG, DnsProvider(DNS),
 
     // https://github.com/erosson/ch2plan - clicker heroes 2 skill tree planner. no longer maintained
     CNAME("ch2", "ch2.erosson.org.s3-website-us-east-1.amazonaws.com.", CF_PROXY_ON),
+    CNAME("piano", "piano.erosson.org.s3-website-us-east-1.amazonaws.com.", CF_PROXY_ON),
+
 
     // https://github.com/erosson/wolcendb - datamined wolcen item and skill data
     // no longer maintained, I don't play wolcen anymore
@@ -36,6 +33,10 @@ D("erosson.org", REG, DnsProvider(DNS),
     IGNORE("vegas-wordle"),
     // https://gitlab.com/erosson/erosson-org
     IGNORE("cf-www"),
+    // https://mapwatch.erosson.org
+    // https://github.com/mapwatch/mapwatch - path of exile map tracking
+    // CNAME("mapwatch", "mapwatch.erosson.org.s3-website-us-east-1.amazonaws.com.", CF_PROXY_ON),
+    IGNORE("mapwatch"),
 
     IGNORE("@", "ALIAS"),
     IGNORE("@", "CNAME"),
