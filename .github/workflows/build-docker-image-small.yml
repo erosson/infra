@@ -1,17 +1,15 @@
 # https://docs.github.com/en/packages/managing-github-packages-using-github-actions-workflows/publishing-and-installing-a-package-with-github-actions
 name: "Build static-sites-small Docker image"
-# Disabled!
-#on:
-#  push:
-#    branches: ['main']
-#  repository_dispatch:
-#    types: [build-docker-image]
+on:
+  push:
+    branches: ['main']
+  repository_dispatch:
+    types: [build-docker-image]
 
 # Defines two custom environment variables for the workflow. These are used for the Container registry domain, and a name for the Docker image that this workflow builds.
 env:
   REGISTRY: ghcr.io
-  #IMAGE_NAME: ${{ github.repository }}
-  IMAGE_NAME: erosson/public-infra-static-sites-small
+  IMAGE_LABEL: public-infra-static-sites-small
 
 jobs:
   build-and-push-image:
@@ -46,7 +44,7 @@ jobs:
         id: meta
         uses: docker/metadata-action@9ec57ed1fcdbf14dcef7dfbe97b2010124a938b7
         with:
-          images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
+          images: ${{ env.REGISTRY }}/${{ github.repository_owner }}/${{ env.IMAGE_LABEL }}
       # This step uses the `docker/build-push-action` action to build the image, based on your repository's `Dockerfile`. If the build succeeds, it pushes the image to GitHub Packages.
       # It uses the `context` parameter to define the build's context as the set of files located in the specified path. For more information, see "[Usage](https://github.com/docker/build-push-action#usage)" in the README of the `docker/build-push-action` repository.
       # It uses the `tags` and `labels` parameters to tag and label the image with the output from the "meta" step.
@@ -64,7 +62,7 @@ jobs:
       - name: Generate artifact attestation
         uses: actions/attest-build-provenance@v1
         with:
-          subject-name: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME}}
+          subject-name: ${{ env.REGISTRY }}/${{ github.repository_owner }}/${{ env.IMAGE_LABEL }}
           subject-digest: ${{ steps.push.outputs.digest }}
           push-to-registry: true
       
@@ -72,3 +70,14 @@ jobs:
         env:
           STATIC_SITES_DEPLOY_PUBLIC_KEY: ${{ secrets.STATIC_SITES_DEPLOY_PUBLIC_KEY }}
           STATIC_SITES_DEPLOY_PRIVATE_KEY: ${{ secrets.STATIC_SITES_DEPLOY_PRIVATE_KEY }}
+
+      - name: Delete old Docker images
+        uses: snok/container-retention-policy@v2
+        with:
+          image-names: ${{ env.IMAGE_LABEL }}
+          cut-off: 3 days ago UTC
+          keep-at-least: 5
+          skip-tags: main
+          account-type: personal
+          token: ${{ secrets.GITHUB_TOKEN }}
+          token-type: github-token
