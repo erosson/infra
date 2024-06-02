@@ -1,5 +1,5 @@
 # https://docs.github.com/en/packages/managing-github-packages-using-github-actions-workflows/publishing-and-installing-a-package-with-github-actions
-name: "Build small Docker image for static websites"
+name: "Build static-sites-small Docker image"
 # Disabled!
 #on:
 #  push:
