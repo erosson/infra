@@ -77,3 +77,13 @@ jobs:
         env:
           STATIC_SITES_DEPLOY_PUBLIC_KEY: ${{ secrets.STATIC_SITES_DEPLOY_PUBLIC_KEY }}
           STATIC_SITES_DEPLOY_PRIVATE_KEY: ${{ secrets.STATIC_SITES_DEPLOY_PRIVATE_KEY }}
+
+      - name: Delete old Docker images
+        uses: snok/container-retention-policy@v2
+        with:
+          image-names: ${{ env.IMAGE_NAME }}
+          cut-off: A week ago UTC
+          keep-at-least: 5
+          skip-tags: main
+          token: ${{ secrets.GITHUB_TOKEN }}
+          token-type: github-token
