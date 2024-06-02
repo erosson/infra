@@ -84,7 +84,7 @@ jobs:
         uses: snok/container-retention-policy@v2
         with:
           image-names: ${{ env.IMAGE_LABEL }}
-          cut-off: A week ago UTC
+          cut-off: 3 days ago UTC
           keep-at-least: 5
           skip-tags: main
           account-type: personal
