@@ -85,5 +85,6 @@ jobs:
           cut-off: A week ago UTC
           keep-at-least: 5
           skip-tags: main
+          account-type: personal
           token: ${{ secrets.GITHUB_TOKEN }}
           token-type: github-token
