@@ -55,7 +55,7 @@
         # passwords must be hashed before adding them to this file. https://caddyserver.com/docs/caddyfile/directives/basicauth
         # `docker run caddy caddy hash-password -p PASSWORD`
         # shame on me for putting a password hash in public git, but production's different, and this doesn't need to be very secure
-        {$OPS_SWARMSIM:evan $2a$14$PM0TnBkPiBESlbIB3iiC9e4SPWn20AbPmOwlbKj.h11vO0ZpTHCPi}
+        {$SWARM_BASICAUTH:evan $2a$14$PM0TnBkPiBESlbIB3iiC9e4SPWn20AbPmOwlbKj.h11vO0ZpTHCPi}
     }
 }
 
