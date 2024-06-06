@@ -12,5 +12,7 @@ D("zealgame.com", REG, DnsProvider(DNS),
 	MX("@", 5, "alt1.aspmx.l.google.com."),
 	MX("@", 10, "aspmx3.googlemail.com."),
 	TXT("@", "google-site-verification=Xd99lUP1JnDZ3eYn08UAJBoelbqrOzb0a9PHvwaXbNk"),
+	// https://search.google.com/search-console?resource_id=sc-domain%3Azealgame.com&hl=en
+	TXT("@", "google-site-verification=T86neJbY-FFesEoJTaK0eUojC5nEDsA_IB0PSpQjugQ"),
 	TXT("@", "v=spf1 -all")
 )
