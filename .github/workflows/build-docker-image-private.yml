@@ -1,0 +1,29 @@
+# https://docs.github.com/en/packages/managing-github-packages-using-github-actions-workflows/publishing-and-installing-a-package-with-github-actions
+name: "Build static-sites Docker image"
+on:
+  push:
+    branches: ['main']
+  repository_dispatch:
+    types: [build-docker-image]
+  workflow_dispatch:
+
+jobs:
+  trigger-image:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Trigger private docker-images build
+        # https://docs.github.com/en/rest/repos/repos?apiVersion=2022-11-28#create-a-repository-dispatch-event
+        run: |
+            curl -L --fail-with-body \
+              -X POST \
+              -H "Accept: application/vnd.github+json" \
+              -H "Authorization: Bearer $GH_TOKEN_INFRA_BUILD_DOCKER_IMAGE" \
+              -H "X-GitHub-Api-Version: 2022-11-28" \
+              https://api.github.com/repos/$TARGET/dispatches \
+              -d '{"event_type":"build-docker-image","client_payload":{"source": "$REGISTRY/$IMAGE_NAME", "repo": "$REPOSITORY" }}'
+        env: 
+          TARGET: erosson/infra-private
+          REGISTRY: ${{ env.REGISTRY }}
+          IMAGE_NAME: ${{ github.repository_owner }}/${{ env.IMAGE_LABEL }}
+          REPOSITORY: ${{ github.repository }}
+          GH_TOKEN_INFRA_BUILD_DOCKER_IMAGE: ${{ secrets.GH_TOKEN_INFRA_BUILD_DOCKER_IMAGE }}
