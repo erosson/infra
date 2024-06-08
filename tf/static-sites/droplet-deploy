@@ -1,5 +1,5 @@
 #!/bin/bash
-set -eu
+set -eux
 cd "`dirname "$0"`"
 
 if [ -v CI ]; then
@@ -14,8 +14,6 @@ fi
 # https://www.reddit.com/r/selfhosted/comments/17of3lt/what_is_the_best_way_to_update_a_docker_image/
 # scp -i .ssh/id_rsa -o UserKnownHostsFile=.ssh/known_hosts docker-compose.yml root@static-droplet.erosson.org:/root/docker-compose.yml
 # TODO: this is not secure, but I gave up fiddling with known_hosts via terraform
-scp -i .ssh/id_rsa  -o StrictHostKeyChecking=no server/docker-compose.yml root@static-droplet.erosson.org:/root/docker-compose.yml
-cat <<EOF | ./ssh
-docker compose pull
-docker compose up -d
-EOF
+scp -i .ssh/id_rsa  -o StrictHostKeyChecking=no server/docker-compose.yml root@static-droplet.erosson.org:/root/docker-compose.tmp.yml
+scp -i .ssh/id_rsa  -o StrictHostKeyChecking=no -p server/droplet-setup.sh root@static-droplet.erosson.org:/root/droplet-setup.sh
+./ssh ./droplet-setup.sh

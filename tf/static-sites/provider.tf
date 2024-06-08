@@ -52,6 +52,14 @@ variable "GITHUB_TOKEN_INFRA_BUILD_DOCKER_IMAGE" {
   # Created at: https://github.com/settings/personal-access-tokens/3347136
   # https://docs.github.com/en/rest/repos/repos?apiVersion=2022-11-28#create-a-repository-dispatch-event
 }
+variable "GITHUB_TOKEN_PRIVATE_INFRA_WRITE_DOCKER_IMAGE" {
+  # Write my private docker images.
+  # This is a public repo! I'm okay with revealing that a private image exists, just not its contents.
+}
+variable "GITHUB_TOKEN_PRIVATE_INFRA_READ_DOCKER_IMAGE" {
+  # Read my private docker images.
+  # This is a public repo! I'm okay with revealing that a private image exists, just not its contents.
+}
 provider "digitalocean" {
   # requires env DIGITALOCEAN_TOKEN. https://registry.terraform.io/providers/digitalocean/digitalocean/latest/docs
 }

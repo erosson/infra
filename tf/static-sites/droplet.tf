@@ -112,6 +112,31 @@ resource "github_actions_secret" "STATIC_SITES_DEPLOY_PUBLIC_KEY" {
   secret_name = "STATIC_SITES_DEPLOY_PUBLIC_KEY"
   plaintext_value = tls_private_key.main.public_key_openssh
 }
+resource "github_actions_secret" "GITHUB_TOKEN_PRIVATE_INFRA_READ_DOCKER_IMAGE" {
+  repository = "infra"
+  secret_name = "GH_TOKEN_PRIVATE_INFRA_READ_DOCKER_IMAGE"
+  plaintext_value = var.GITHUB_TOKEN_PRIVATE_INFRA_READ_DOCKER_IMAGE
+}
+resource "github_actions_secret" "PRIVATE_STATIC_SITES_DEPLOY_PRIVATE_KEY" {
+  repository = "infra-private"
+  secret_name = "STATIC_SITES_DEPLOY_PRIVATE_KEY"
+  plaintext_value = tls_private_key.main.private_key_openssh
+}
+resource "github_actions_secret" "PRIVATE_STATIC_SITES_DEPLOY_PUBLIC_KEY" {
+  repository = "infra-private"
+  secret_name = "STATIC_SITES_DEPLOY_PUBLIC_KEY"
+  plaintext_value = tls_private_key.main.public_key_openssh
+}
+resource "github_actions_secret" "PRIVATE_GITHUB_TOKEN_PRIVATE_INFRA_WRITE_DOCKER_IMAGE" {
+  repository = "infra-private"
+  secret_name = "GH_TOKEN_PRIVATE_INFRA_WRITE_DOCKER_IMAGE"
+  plaintext_value = var.GITHUB_TOKEN_PRIVATE_INFRA_WRITE_DOCKER_IMAGE
+}
+resource "github_actions_secret" "PRIVATE_GITHUB_TOKEN_PRIVATE_INFRA_READ_DOCKER_IMAGE" {
+  repository = "infra-private"
+  secret_name = "GH_TOKEN_PRIVATE_INFRA_READ_DOCKER_IMAGE"
+  plaintext_value = var.GITHUB_TOKEN_PRIVATE_INFRA_READ_DOCKER_IMAGE
+}
 # https://registry.terraform.io/providers/digitalocean/digitalocean/latest/docs/resources/ssh_key
 resource "digitalocean_ssh_key" "main" {
   name = "tf: ssh/main"
@@ -133,10 +158,23 @@ data "cloudinit_config" "main" {
     content = yamlencode({
       write_files = [
         {
-          path = "/root/docker-compose.yml"
+          path = "/root/docker-compose.tmp.yml"
           permissions = "0644"
           owner = "root"
           content = file("${path.module}/server/docker-compose.yml")
+        },
+        {
+          # deploy secrets file. yes, cloud-init can safely create files with secrets.
+          # example: https://docs.cloud-init.io/en/22.1/topics/examples.html
+          # `./droplet-deploy` does not update this, it requires rebuilding the machine.
+          # we're creating this from a public repo, but the secrets are still secret!
+          path = "/root/.env"
+          permissions = "0600"
+          owner = "root"
+          content = <<-EOF
+            # read private docker images from ghcr.io
+            GITHUB_TOKEN_PRIVATE_INFRA_READ_DOCKER_IMAGE="${var.GITHUB_TOKEN_PRIVATE_INFRA_READ_DOCKER_IMAGE}"
+          EOF
         }
       ]
     })

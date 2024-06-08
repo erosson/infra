@@ -2,7 +2,8 @@
 version: "3.8"
 services:
   static-sites:
-    image: ghcr.io/erosson/public-infra-static-sites:main
+    # image: ghcr.io/erosson/public-infra-static-sites:main
+    image: ghcr.io/erosson/private-infra-static-sites:main
     # after reboot, or restarting the docker daemon, auto-launch this container
     restart: unless-stopped
     # volume mounts, ports, and cap-add necessary for caddy ssl and its persistent data
