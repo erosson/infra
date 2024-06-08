@@ -1,5 +1,5 @@
 # https://docs.github.com/en/packages/managing-github-packages-using-github-actions-workflows/publishing-and-installing-a-package-with-github-actions
-name: "Build static-sites Docker image"
+name: "Trigger private static-sites Docker image"
 on:
   push:
     branches: ['main']
@@ -11,9 +11,8 @@ jobs:
   trigger-image:
     runs-on: ubuntu-latest
     steps:
-      - name: Trigger private docker-images build
-        # https://docs.github.com/en/rest/repos/repos?apiVersion=2022-11-28#create-a-repository-dispatch-event
-        run: |
+      # https://docs.github.com/en/rest/repos/repos?apiVersion=2022-11-28#create-a-repository-dispatch-event
+      - run: |
             curl -L --fail-with-body \
               -X POST \
               -H "Accept: application/vnd.github+json" \

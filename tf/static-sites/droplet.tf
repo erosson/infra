@@ -87,6 +87,11 @@ resource "github_actions_secret" "main" {
   secret_name = "GH_TOKEN_INFRA_BUILD_DOCKER_IMAGE"
   plaintext_value = var.GITHUB_TOKEN_INFRA_BUILD_DOCKER_IMAGE
 }
+resource "github_actions_secret" "infra" {
+  repository = "infra"
+  secret_name = "GH_TOKEN_INFRA_BUILD_DOCKER_IMAGE"
+  plaintext_value = var.GITHUB_TOKEN_INFRA_BUILD_DOCKER_IMAGE
+}
 
 resource "tls_private_key" "main" {
   algorithm = "RSA"
