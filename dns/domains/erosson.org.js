@@ -66,7 +66,7 @@ D("erosson.org", REG, DnsProvider(DNS),
     // CNAME("freedbt", "freedbt.pages.dev.", CF_PROXY_ON),
 
     // https://github.com/erosson/genealogy (private repo, but it's fine that the dns record's public)
-    CNAME("genealogy", "cname.vercel-dns.com."),
+    IGNORE("genealogy"),
 
     // https://github.com/erosson/keyboard-collector
     // CNAME("keyboard-collector", "keyboard-collector.netlify.app."),

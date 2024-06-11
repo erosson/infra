@@ -16,7 +16,6 @@ locals {
     # TODO: `/s3/buckets/www.erosson.org` still exists. once we're confident in this new docker hosting, delete it
     "erosson.org",
     "../mapwatch/mapwatch",
-    # TODO: oops, this can't go here. the combined docker image is public, so we can't copy truly private files into it!
     "genealogy",   # private repo. contents are secret, but its existence is not
   ]
   # generate dns records.
@@ -38,7 +37,6 @@ locals {
     {sub="www", domain="evanrosson.org", zone_id=local.evanrosson_org_zone_id},
     {sub="", domain="xmarkedgame.com", zone_id=local.xmarkedgame_com_zone_id},
     {sub="www", domain="xmarkedgame.com", zone_id=local.xmarkedgame_com_zone_id},
-    {sub="docker-math", domain="swarmsim.com", zone_id=local.swarmsim_com_zone_id},
     {sub="docker-www", domain="swarmsim.com", zone_id=local.swarmsim_com_zone_id},
     {sub="docker", domain="swarmsim.com", zone_id=local.swarmsim_com_zone_id},
     {sub="docker-preprod", domain="swarmsim.com", zone_id=local.swarmsim_com_zone_id},
@@ -56,7 +54,7 @@ locals {
     {sub="cooking", domain="erosson.org", zone_id=local.erosson_org_zone_id},
     {sub="vegas-wordle", domain="erosson.org", zone_id=local.erosson_org_zone_id},
     {sub="mapwatch", domain="erosson.org", zone_id=local.erosson_org_zone_id},
-    {sub="docker-genealogy", domain="erosson.org", zone_id=local.erosson_org_zone_id},
+    {sub="genealogy", domain="erosson.org", zone_id=local.erosson_org_zone_id},
   ]
 }
 
