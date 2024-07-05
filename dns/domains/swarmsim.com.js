@@ -1,11 +1,5 @@
-CLI_DEFAULTS({
-	SWARMSIM_COM_SECRET1: null,
-	SWARMSIM_COM_SECRET2: null,
-})
 D("swarmsim.com", REG, DnsProvider(DNS),
 	DefaultTTL(1),
-	CNAME(SWARMSIM_COM_SECRET1, "cname.vercel-dns.com."),
-	CNAME(SWARMSIM_COM_SECRET2, "cname.vercel-dns.com."),
 	CNAME("elm", "swarm-elm.netlify.com."),
 	CNAME("mail", "ghs.google.com."),
 	CNAME("netlify-preprod", "swarmsim-preprod.netlify.app."),
@@ -26,6 +20,7 @@ D("swarmsim.com", REG, DnsProvider(DNS),
 	TXT("@", "google-site-verification=huueYzqrM57YM5ogbWfTfrgxMPOtLuwIBf6l82rGrjE"),
 
 	// terraform handles others
+	IGNORE("*", "A"), // messy...
 	IGNORE("docker"),
 	IGNORE("docker-www"),
 	IGNORE("docker-preprod"),
