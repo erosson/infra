@@ -61,6 +61,8 @@ D("erosson.org", REG, DnsProvider(DNS),
     A("home.home", "100.118.183.87"),  // for tailscale search domains. https://home.home.erosson.org/ -> https://home/
     A("default.home", "100.118.183.87"),
     A("status.home", "100.118.183.87"),
+    A("kuma.home", "100.118.183.87"),
+    A("gatus.home", "100.118.183.87"),
     A("proxmox.home", "100.118.183.87"),
 
     A("jellyfin.home", "100.118.183.87"),
