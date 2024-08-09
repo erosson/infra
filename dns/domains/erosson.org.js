@@ -56,6 +56,20 @@ D("erosson.org", REG, DnsProvider(DNS),
     // stuff that isn't widely used, and not maintained:
     ///////////////////////////////////////////////////////
 
+    // my private home network. it's fine to expose these domains/ips, they're inside tailscale
+    A("home", "100.118.183.87"),
+    A("home.home", "100.118.183.87"),  // for tailscale search domains. https://home.home.erosson.org/ -> https://home/
+    A("default.home", "100.118.183.87"),
+    A("status.home", "100.118.183.87"),
+    A("proxmox.home", "100.118.183.87"),
+
+    A("jellyfin.home", "100.118.183.87"),
+    A("nextcloud.home", "100.118.183.87"),
+    A("syncthing.home", "100.118.183.87"),
+    A("watchtower.home", "100.118.183.87"),
+    A("x.home", "100.118.183.87"),
+    A("yt.home", "100.118.183.87"),
+
     // https://github.com/erosson/diff
     // CNAME("diff", "erosson-diff.netlify.app."),
 
@@ -82,7 +96,7 @@ D("erosson.org", REG, DnsProvider(DNS),
     CNAME("travel", "travel.erosson.org.s3-website-us-east-1.amazonaws.com.", CF_PROXY_ON),
     CNAME("wheres", "domains.tumblr.com."),
 
-    A("finsat-qgis", "138.197.50.183"),
+    // A("finsat-qgis", "138.197.50.183"),
 
     ///////////////////////////////////////////////////////
     // miscellaneous dns config, not visible to users:
