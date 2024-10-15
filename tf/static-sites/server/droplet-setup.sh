@@ -2,10 +2,6 @@
 set -eux
 cd ~
 
-df -h
-truncate -s 0 /var/lib/docker/containers/**/*-json.log
-df -h
-
 ufw allow 80
 ufw allow 443
 
