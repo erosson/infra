@@ -71,6 +71,7 @@ D("erosson.org", REG, DnsProvider(DNS),
     A("watchtower.home", "100.118.183.87"),
     A("x.home", "100.118.183.87"),
     A("yt.home", "100.118.183.87"),
+    A("adguard.home", "100.118.183.87"),
 
     // https://github.com/erosson/diff
     // CNAME("diff", "erosson-diff.netlify.app."),
