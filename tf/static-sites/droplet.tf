@@ -215,14 +215,14 @@ resource "digitalocean_droplet" "main" {
 }
 
 # TODO delete - not needed for self-signed certs
-resource "digitalocean_volume" "main" {
-  region = "nyc1"
-  name = "static-sites"
-  size = 5
-  description = "Caddy's persistent data"
-  initial_filesystem_type = "ext4"
-  initial_filesystem_label = "static-sites"
-}
+#resource "digitalocean_volume" "main" {
+#  region = "nyc1"
+#  name = "static-sites"
+#  size = 5
+#  description = "Caddy's persistent data"
+#  initial_filesystem_type = "ext4"
+#  initial_filesystem_label = "static-sites"
+#}
 
 ## create a known_hosts file, so ssh/deploy work without a "host key verification failed" error
 ## ugh, screw this. I tried.
@@ -285,6 +285,7 @@ output "ip_address" {
 }
 
 # https://cloud.digitalocean.com/monitors/uptime/checks
+# alerts created by hand - the terraform interface seems incomplete?!
 resource "digitalocean_uptime_check" "www-erosson-org" {
   name    = "www-erosson-org"
   target  = "https://www.erosson.org/healthz"
