@@ -1,4 +1,5 @@
 // imported with `dnscontrol get-zones --format=js cloudflare - erosson.org`
+var HOMENET = "100.119.33.50"
 D("erosson.org", REG, DnsProvider(DNS),
     DefaultTTL(1),
 
@@ -57,21 +58,21 @@ D("erosson.org", REG, DnsProvider(DNS),
     ///////////////////////////////////////////////////////
 
     // my private home network. it's fine to expose these domains/ips, they're inside tailscale
-    A("home", "100.118.183.87"),
-    A("home.home", "100.118.183.87"),  // for tailscale search domains. https://home.home.erosson.org/ -> https://home/
-    A("default.home", "100.118.183.87"),
-    A("status.home", "100.118.183.87"),
-    A("kuma.home", "100.118.183.87"),
-    A("gatus.home", "100.118.183.87"),
-    A("proxmox.home", "100.118.183.87"),
+    A("home", HOMENET),
+    A("home.home", HOMENET),  // for tailscale search domains. https://home.home.erosson.org/ -> https://home/
+    A("default.home", HOMENET),
+    A("status.home", HOMENET),
+    A("kuma.home", HOMENET),
+    A("gatus.home", HOMENET),
+    A("proxmox.home", HOMENET),
 
-    A("jellyfin.home", "100.118.183.87"),
-    A("nextcloud.home", "100.118.183.87"),
-    A("syncthing.home", "100.118.183.87"),
-    A("watchtower.home", "100.118.183.87"),
-    A("x.home", "100.118.183.87"),
-    A("yt.home", "100.118.183.87"),
-    A("adguard.home", "100.118.183.87"),
+    A("jellyfin.home", HOMENET),
+    A("nextcloud.home", HOMENET),
+    A("syncthing.home", HOMENET),
+    A("watchtower.home", HOMENET),
+    A("x.home", HOMENET),
+    A("yt.home", HOMENET),
+    A("adguard.home", HOMENET),
 
     // https://github.com/erosson/diff
     // CNAME("diff", "erosson-diff.netlify.app."),
