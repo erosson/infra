@@ -1,5 +1,8 @@
+// tailscale network
+var TAILNET = "100.119.33.50"
+// home wifi network, outside tailscale/accessible to neighbors
+var LOCALNET = "192.168.86.248"
 // imported with `dnscontrol get-zones --format=js cloudflare - erosson.org`
-var HOMENET = "100.119.33.50"
 D("erosson.org", REG, DnsProvider(DNS),
     DefaultTTL(1),
 
@@ -58,21 +61,24 @@ D("erosson.org", REG, DnsProvider(DNS),
     ///////////////////////////////////////////////////////
 
     // my private home network. it's fine to expose these domains/ips, they're inside tailscale
-    A("home", HOMENET),
-    A("home.home", HOMENET),  // for tailscale search domains. https://home.home.erosson.org/ -> https://home/
-    A("default.home", HOMENET),
-    A("status.home", HOMENET),
-    A("kuma.home", HOMENET),
-    A("gatus.home", HOMENET),
-    A("proxmox.home", HOMENET),
+    A("home", TAILNET),
+    A("home.home", TAILNET),  // for tailscale search domains. https://home.home.erosson.org/ -> https://home/
+    A("default.home", TAILNET),
+    A("status.home", TAILNET),
+    A("kuma.home", TAILNET),
+    A("gatus.home", TAILNET),
+    A("proxmox.home", TAILNET),
 
-    A("jellyfin.home", HOMENET),
-    A("nextcloud.home", HOMENET),
-    A("syncthing.home", HOMENET),
-    A("watchtower.home", HOMENET),
-    A("x.home", HOMENET),
-    A("yt.home", HOMENET),
-    A("adguard.home", HOMENET),
+    A("jellyfin.home", TAILNET),
+    A("nextcloud.home", TAILNET),
+    A("syncthing.home", TAILNET),
+    A("watchtower.home", TAILNET),
+    A("x.home", TAILNET),
+    A("yt.home", TAILNET),
+    A("adguard.home", TAILNET),
+
+    A("adder.local", LOCALNET),
+    A("local", LOCALNET),
 
     // https://github.com/erosson/diff
     // CNAME("diff", "erosson-diff.netlify.app."),
@@ -114,6 +120,9 @@ D("erosson.org", REG, DnsProvider(DNS),
 
     // google search console site verification
     TXT("@", "google-site-verification=DnQIaVLGOb-OuuWglt5iz_BEkhZkh1t4qsVUZkdz4sQ"),
+
+    // bluesky
+    TXT("_atproto", "did=did:plc:4txjaouzrleil6ul3x4nmicx"),
 
     // erosson.org gmail configuration, I think
     CNAME("mail", "ghs.google.com."),
