@@ -1,4 +1,4 @@
 #!/bin/sh -eu
-cd "`dirname "$0"`/.."
+cd "`realpath $(dirname "$0")/..`"
 
 infisical run --command "dnscontrol preview --full -v SWARMSIM_COM_SECRET1=\$SWARMSIM_COM_SECRET1 -v SWARMSIM_COM_SECRET2=\$SWARMSIM_COM_SECRET2 $@"
