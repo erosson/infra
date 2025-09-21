@@ -1,6 +1,6 @@
 // tailscale network
 var TAILNET_Y40 = "100.119.33.50"
-var TAILNET_ADDER = "100.64.162.105"
+var TAILNET_ADDER = "100.111.171.23"
 // home wifi network, outside tailscale/accessible to neighbors
 var LOCALNET = "192.168.86.248"
 // imported with `dnscontrol get-zones --format=js cloudflare - erosson.org`
