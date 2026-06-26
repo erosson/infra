@@ -1,6 +1,6 @@
 // tailscale network
 var TAILNET_Y40 = "100.119.33.50"
-var TAILNET_ADDER = "100.111.171.23"
+var TAILNET_ADDER = "100.64.40.105"
 // home wifi network, outside tailscale/accessible to neighbors
 var LOCALNET = "192.168.86.248"
 // imported with `dnscontrol get-zones --format=js cloudflare - erosson.org`
@@ -57,10 +57,6 @@ D("erosson.org", REG, DnsProvider(DNS),
     IGNORE("static-droplet"),
     IGNORE("docker-genealogy"),
 
-    ///////////////////////////////////////////////////////
-    // stuff that isn't widely used, and not maintained:
-    ///////////////////////////////////////////////////////
-
     // my private home network. it's fine to expose these domains/ips, they're inside tailscale
     A("home", TAILNET_Y40),
     A("home.home", TAILNET_Y40),  // for tailscale search domains. https://home.home.erosson.org/ -> https://home/
@@ -86,6 +82,8 @@ D("erosson.org", REG, DnsProvider(DNS),
     A("x.adder", TAILNET_ADDER),
     A("syncthing.adder", TAILNET_ADDER),
     A("adguard.adder", TAILNET_ADDER),
+    A("jellyfin.adder", TAILNET_ADDER),
+    A("hass.adder", TAILNET_ADDER),
 
     A("adder.local", LOCALNET),
     A("local", LOCALNET),
