@@ -2,7 +2,7 @@
 // var TAILNET_Y40 = "100.119.33.50"
 var TAILNET_ADDER = "100.64.40.105"
 // home wifi network, outside tailscale/accessible to neighbors
-var LOCALNET = "192.168.86.248"
+var LOCALNET = "192.168.86.161"
 // imported with `dnscontrol get-zones --format=js cloudflare - erosson.org`
 D("erosson.org", REG, DnsProvider(DNS),
     DefaultTTL(1),
@@ -86,8 +86,10 @@ D("erosson.org", REG, DnsProvider(DNS),
     A("hass.adder", TAILNET_ADDER),
     A("karaoke.adder", TAILNET_ADDER),
 
-    A("adder.local", LOCALNET),
-    A("local", LOCALNET),
+    A("home", LOCALNET),
+    A("adder.home", LOCALNET),
+    A("karaoke.home", LOCALNET),
+    A("pikaraoke.home", LOCALNET),
 
     // https://github.com/erosson/diff
     // CNAME("diff", "erosson-diff.netlify.app."),
