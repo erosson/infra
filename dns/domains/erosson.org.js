@@ -1,5 +1,5 @@
 // tailscale network
-var TAILNET_Y40 = "100.119.33.50"
+// var TAILNET_Y40 = "100.119.33.50"
 var TAILNET_ADDER = "100.64.40.105"
 // home wifi network, outside tailscale/accessible to neighbors
 var LOCALNET = "192.168.86.248"
@@ -58,22 +58,22 @@ D("erosson.org", REG, DnsProvider(DNS),
     IGNORE("docker-genealogy"),
 
     // my private home network. it's fine to expose these domains/ips, they're inside tailscale
-    A("home", TAILNET_Y40),
-    A("home.home", TAILNET_Y40),  // for tailscale search domains. https://home.home.erosson.org/ -> https://home/
-    A("default.home", TAILNET_Y40),
-    A("status.home", TAILNET_Y40),
-    A("kuma.home", TAILNET_Y40),
-    A("gatus.home", TAILNET_Y40),
-    A("proxmox.home", TAILNET_Y40),
+    // A("home", TAILNET_Y40),
+    // A("home.home", TAILNET_Y40),  // for tailscale search domains. https://home.home.erosson.org/ -> https://home/
+    // A("default.home", TAILNET_Y40),
+    // A("status.home", TAILNET_Y40),
+    // A("kuma.home", TAILNET_Y40),
+    // A("gatus.home", TAILNET_Y40),
+    // A("proxmox.home", TAILNET_Y40),
 
-    A("jellyfin.home", TAILNET_Y40),
-    A("nextcloud.home", TAILNET_Y40),
-    A("syncthing.home", TAILNET_Y40),
-    A("watchtower.home", TAILNET_Y40),
-    A("x.home", TAILNET_Y40),
-    A("yt.home", TAILNET_Y40),
-    A("adguard.home", TAILNET_Y40),
-    A("grist.home", TAILNET_Y40),
+    // A("jellyfin.home", TAILNET_Y40),
+    // A("nextcloud.home", TAILNET_Y40),
+    // A("syncthing.home", TAILNET_Y40),
+    // A("watchtower.home", TAILNET_Y40),
+    // A("x.home", TAILNET_Y40),
+    // A("yt.home", TAILNET_Y40),
+    // A("adguard.home", TAILNET_Y40),
+    // A("grist.home", TAILNET_Y40),
 
     A("adder", TAILNET_ADDER),
     A("adder.adder", TAILNET_ADDER),
@@ -84,6 +84,7 @@ D("erosson.org", REG, DnsProvider(DNS),
     A("adguard.adder", TAILNET_ADDER),
     A("jellyfin.adder", TAILNET_ADDER),
     A("hass.adder", TAILNET_ADDER),
+    A("karaoke.adder", TAILNET_ADDER),
 
     A("adder.local", LOCALNET),
     A("local", LOCALNET),
